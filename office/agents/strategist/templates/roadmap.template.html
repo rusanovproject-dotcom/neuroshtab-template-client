@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{CLIENT_NAME}} — Roadmap программы</title>
+<style>
+  /* =========================================================
+     Arctic Cold Light — Strategist Roadmap template
+     Standalone: no external CSS/JS/fonts. System font stack.
+     ========================================================= */
+
+  :root {
+    /* neutrals — iceberg */
+    --ink:        #0F172A;   /* primary text */
+    --ink-soft:   #334155;   /* body */
+    --ink-muted:  #64748B;   /* captions, secondary */
+    --ink-quiet:  #94A3B8;   /* placeholders only */
+    --line:       #E2E8F0;   /* separators, borders */
+    --line-soft:  #EEF2F7;
+    --bg:         #F6F8FB;   /* page bg */
+    --bg-soft:    #EDF2F8;
+    --white:      #FFFFFF;
+
+    /* cold accents */
+    --cyan:       #22D3EE;
+    --teal:       #0EA5A4;
+    --ice:        #E0F2FE;
+    --ice-deep:   #BAE6FD;
+    --accent:     #0284C7;
+
+    /* glass */
+    --glass:      rgba(255,255,255,0.72);
+    --glass-bd:   rgba(226,232,240,0.9);
+
+    /* shadows — soft, cold */
+    --sh-1: 0 1px 2px rgba(15,23,42,0.04), 0 1px 1px rgba(15,23,42,0.03);
+    --sh-2: 0 2px 8px rgba(15,23,42,0.05), 0 1px 2px rgba(15,23,42,0.04);
+    --sh-3: 0 10px 30px rgba(15,23,42,0.06), 0 2px 6px rgba(15,23,42,0.04);
+
+    /* radii */
+    --r-sm: 10px;
+    --r-md: 16px;
+    --r-lg: 24px;
+    --r-xl: 28px;
+
+    /* scale */
+    --container: 1120px;
+    --gap: 24px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue",
+                 "Inter", "Segoe UI", Roboto, Ubuntu, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    background:
+      radial-gradient(1200px 600px at 90% -10%, #E0F2FE 0%, rgba(224,242,254,0) 60%),
+      radial-gradient(900px 500px at -10% 10%, #EEF5FB 0%, rgba(238,245,251,0) 55%),
+      var(--bg);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--ink);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.1; }
+  h2 { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.2; font-weight: 400; }
+  h3 { font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+
+  p { margin: 0; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- HEADER ---------- */
+  .hdr {
+    padding: 72px 0 40px;
+  }
+  .hdr-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--glass);
+    border: 1px solid var(--glass-bd);
+    color: var(--ink-muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--sh-1);
+  }
+  .hdr-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 0 4px rgba(34,211,238,0.18);
+  }
+  .hdr h1 { margin-top: 18px; }
+  .hdr h1 .accent {
+    background: linear-gradient(90deg, #0284C7 0%, #0EA5A4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hdr-meta {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+  .hdr-meta .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    box-shadow: var(--sh-1);
+  }
+
+  .focus-card {
+    margin-top: 32px;
+    padding: 28px 28px 24px;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-bd);
+    border-radius: var(--r-xl);
+    box-shadow: var(--sh-3);
+  }
+  .focus-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .focus-title {
+    margin-top: 8px;
+    font-size: clamp(20px, 2.4vw, 26px);
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .focus-quote {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, rgba(224,242,254,0.6) 0%, rgba(224,242,254,0.2) 100%);
+    border-left: 3px solid var(--cyan);
+    border-radius: 12px;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ---------- SNAPSHOT ---------- */
+  .section {
+    padding: 56px 0 20px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .section-eyebrow {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .section-head h2 { margin-top: 4px; }
+
+  .snapshot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .snap-card {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-2);
+  }
+  .snap-card .lbl {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .snap-card .val {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .snap-card .val .emoji {
+    display: inline-flex;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    background: var(--ice);
+    border: 1px solid var(--ice-deep);
+    border-radius: 12px;
+    font-size: 22px;
+  }
+  .snap-card .sub {
+    margin-top: 8px;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  .levers {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .lever {
+    position: relative;
+    padding: 22px 22px 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-2);
+    overflow: hidden;
+  }
+  .lever::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #22D3EE, #0EA5A4);
+    opacity: 0.9;
+  }
+  .lever .n {
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+  }
+  .lever .t {
+    margin-top: 10px;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* ---------- PROGRESS BAR ---------- */
+  .progress {
+    margin-top: 36px;
+    padding: 24px 26px;
+    background: var(--glass);
+    border: 1px solid var(--glass-bd);
+    border-radius: var(--r-xl);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--sh-2);
+  }
+  .progress-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .progress-top .lbl {
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted);
+  }
+  .progress-top .cnt {
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .bar {
+    position: relative;
+    height: 10px;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--line-soft);
+  }
+  .bar .fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: calc(({{WEEKS_DONE}} / 6) * 100%);
+    background: linear-gradient(90deg, #22D3EE 0%, #0EA5A4 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px rgba(14,165,164,0.15);
+  }
+  .ticks {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+  .ticks span { letter-spacing: 0.08em; }
+
+  /* ---------- WEEKS ---------- */
+  .weeks {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .week {
+    position: relative;
+    padding: 28px 28px 26px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    box-shadow: var(--sh-2);
+    transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .week:hover {
+    box-shadow: var(--sh-3);
+    border-color: #D6E2EE;
+  }
+
+  .week.current {
+    border-color: rgba(34,211,238,0.55);
+    background: linear-gradient(180deg, #FFFFFF 0%, #F2FBFE 100%);
+    box-shadow: 0 0 0 4px rgba(34,211,238,0.10), var(--sh-3);
+  }
+  .week.current::before {
+    content: "Вы здесь";
+    position: absolute;
+    top: -10px; left: 24px;
+    padding: 4px 10px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .week.done {
+    background: #FBFDFE;
+    opacity: 0.92;
+  }
+  .week.done .w-goal { color: var(--ink-muted); text-decoration: line-through; text-decoration-color: rgba(100,116,139,0.35); }
+
+  .w-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+  }
+  .w-num {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .w-badge {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+    background: var(--ice);
+    border: 1px solid var(--ice-deep);
+    color: var(--accent);
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .week.current .w-badge {
+    background: linear-gradient(180deg, #22D3EE, #0EA5A4);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(14,165,164,0.25);
+  }
+  .w-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .w-date {
+    margin-top: 2px;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  .w-metric {
+    text-align: right;
+    padding: 10px 14px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    min-width: 140px;
+  }
+  .w-metric .lbl {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .w-metric .val {
+    display: block;
+    margin-top: 4px;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .w-goal {
+    margin-top: 20px;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.3;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .w-body {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+  }
+
+  .w-tasks .subhead,
+  .w-side .subhead {
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+  }
+
+  .tasks {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tasks li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    background: #FBFDFE;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .tasks li .chk {
+    flex: 0 0 auto;
+    width: 18px; height: 18px;
+    margin-top: 2px;
+    border-radius: 6px;
+    border: 1.5px solid #CBD5E1;
+    background: #fff;
+    position: relative;
+  }
+  .tasks li[data-done="true"] .chk {
+    background: linear-gradient(180deg, #22D3EE, #0EA5A4);
+    border-color: transparent;
+  }
+  .tasks li[data-done="true"] .chk::after {
+    content: "";
+    position: absolute;
+    left: 4px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .tasks li[data-done="true"] { color: var(--ink-muted); text-decoration: line-through; text-decoration-color: rgba(100,116,139,0.3); }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background: var(--ice);
+    color: #075985;
+    border: 1px solid var(--ice-deep);
+    border-radius: 999px;
+    letter-spacing: 0.01em;
+  }
+  .chip::before {
+    content: "";
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .artifact {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px dashed #CBD5E1;
+    border-radius: 12px;
+  }
+  .artifact .ico {
+    width: 34px; height: 34px;
+    flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    background: var(--bg-soft);
+    color: var(--accent);
+  }
+  .artifact .t {
+    display: flex; flex-direction: column;
+  }
+  .artifact .t .lbl {
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .artifact .t .val {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .footer {
+    margin-top: 64px;
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-muted);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer .mark {
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .snapshot { grid-template-columns: 1fr; }
+    .levers { grid-template-columns: 1fr; }
+    .w-body { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 18px; }
+    .hdr { padding: 48px 0 24px; }
+    .focus-card { padding: 22px; border-radius: 22px; }
+    .section { padding: 40px 0 8px; }
+    .week { padding: 22px; border-radius: 22px; }
+    .w-top { grid-template-columns: 1fr; }
+    .w-metric { text-align: left; min-width: 0; }
+    .ticks { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .hdr-meta { font-size: 13px; }
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+    body { background: #fff; }
+    .week, .snap-card, .lever, .focus-card, .progress { box-shadow: none; }
+    .week.current { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<main class="container">
+
+  <!-- ============== HEADER ============== -->
+  <header class="hdr">
+    <span class="hdr-eyebrow">
+      <span class="dot"></span>
+      Персональный roadmap · 6 недель
+    </span>
+
+    <h1>
+      {{CLIENT_NAME}} —<br>
+      <span class="accent">программа роста</span>
+    </h1>
+
+    <div class="hdr-meta">
+      <span class="pill">Старт: {{START_DATE}}</span>
+      <span class="pill">Финал: {{END_DATE}}</span>
+      <span class="pill">Формат: {{FORMAT}}</span>
+    </div>
+
+    <section class="focus-card" aria-label="Фокус программы">
+      <div class="focus-label">Фокус программы</div>
+      <div class="focus-title">{{PROGRAM_FOCUS}}</div>
+      <blockquote class="focus-quote">
+        <strong style="color:var(--ink);font-weight:500;">Почему именно это.</strong>
+        {{WHY_THIS_FOCUS}}
+      </blockquote>
+    </section>
+  </header>
+
+  <!-- ============== STRATEGY SNAPSHOT ============== -->
+  <section class="section" aria-label="Стратегический срез">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">01 · Срез стратегии</div>
+        <h2>Где сейчас и куда тянем</h2>
+      </div>
+    </div>
+
+    <div class="snapshot">
+      <article class="snap-card">
+        <div class="lbl">Слабая сторона</div>
+        <div class="val">
+          <span class="emoji" aria-hidden="true">{{WEAKNESS_ICON}}</span>
+          <span>{{WEAKNESS_TYPE}}</span>
+        </div>
+        <div class="sub">{{WEAKNESS_NOTE}}</div>
+      </article>
+
+      <article class="snap-card">
+        <div class="lbl">Главный блокер</div>
+        <div class="val">
+          <span class="emoji" aria-hidden="true">🧱</span>
+          <span>{{MAIN_BLOCKER}}</span>
+        </div>
+        <div class="sub">{{BLOCKER_NOTE}}</div>
+      </article>
+    </div>
+
+    <div class="levers" aria-label="Рычаги роста">
+      <article class="lever">
+        <div class="n">РЫЧАГ · 01</div>
+        <div class="t">{{LEVER_1}}</div>
+      </article>
+      <article class="lever">
+        <div class="n">РЫЧАГ · 02</div>
+        <div class="t">{{LEVER_2}}</div>
+      </article>
+      <article class="lever">
+        <div class="n">РЫЧАГ · 03</div>
+        <div class="t">{{LEVER_3}}</div>
+      </article>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress" aria-label="Прогресс программы">
+      <div class="progress-top">
+        <span class="lbl">Прогресс программы</span>
+        <span class="cnt">{{WEEKS_DONE}} / 6 недель</span>
+      </div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="ticks">
+        <span>НЕД 1</span><span>НЕД 2</span><span>НЕД 3</span>
+        <span>НЕД 4</span><span>НЕД 5</span><span>НЕД 6</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 6 WEEKS ============== -->
+  <section class="section" aria-label="План на 6 недель">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">02 · План на 6 недель</div>
+        <h2>Сверху вниз — как будем двигаться</h2>
+      </div>
+    </div>
+
+    <div class="weeks">
+
+      <!-- ============ WEEK 1 ============ -->
+      <!-- Status: добавь class="current" или "done" к <article class="week"> -->
+      <article class="week {{WEEK_1_STATUS}}" aria-label="Неделя 1">
+        <div class="w-top">
+          <div class="w-num">
+            <div class="w-badge">01</div>
+            <div>
+              <div class="w-label">Неделя 1</div>
+              <div class="w-date">{{WEEK_1_DATE}}</div>
+            </div>
+          </div>
+          <div class="w-metric">
+            <span class="lbl">Метрика</span>
+            <span class="val">{{WEEK_1_METRIC}}</span>
+          </div>
+        </div>
+
+        <div class="w-goal">{{WEEK_1_GOAL}}</div>
+
+        <div class="w-body">
+          <div class="w-tasks">
+            <div class="subhead">Задачи недели</div>
+            <ul class="tasks">
+              <!-- Стратег вставит 3–5 <li>. Формат:
+                   <li><span class="chk"></span>Текст задачи</li>
+                   <li data-done="true"><span class="chk"></span>Выполненная задача</li>
+              -->
+              {{WEEK_1_TASKS}}
+            </ul>
+          </div>
+          <div class="w-side">
+            <div class="subhead">Агенты</div>
+            <div class="chips">
+              <!-- Стратег вставит чипы: <span class="chip">Producer</span> ... -->
+              {{WEEK_1_AGENTS}}
+            </div>
+
+            <div class="artifact" title="Артефакт недели">
+              <div class="ico" aria-hidden="true">
+                <!-- inline SVG: document -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="t">
+                <span class="lbl">Артефакт на выходе</span>
+                <span class="val">{{WEEK_1_ARTIFACT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ WEEK 2 ============ -->
+      <article class="week {{WEEK_2_STATUS}}" aria-label="Неделя 2">
+        <div class="w-top">
+          <div class="w-num">
+            <div class="w-badge">02</div>
+            <div>
+              <div class="w-label">Неделя 2</div>
+              <div class="w-date">{{WEEK_2_DATE}}</div>
+            </div>
+          </div>
+          <div class="w-metric">
+            <span class="lbl">Метрика</span>
+            <span class="val">{{WEEK_2_METRIC}}</span>
+          </div>
+        </div>
+
+        <div class="w-goal">{{WEEK_2_GOAL}}</div>
+
+        <div class="w-body">
+          <div class="w-tasks">
+            <div class="subhead">Задачи недели</div>
+            <ul class="tasks">{{WEEK_2_TASKS}}</ul>
+          </div>
+          <div class="w-side">
+            <div class="subhead">Агенты</div>
+            <div class="chips">{{WEEK_2_AGENTS}}</div>
+            <div class="artifact" title="Артефакт недели">
+              <div class="ico" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="t">
+                <span class="lbl">Артефакт на выходе</span>
+                <span class="val">{{WEEK_2_ARTIFACT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ WEEK 3 ============ -->
+      <article class="week {{WEEK_3_STATUS}}" aria-label="Неделя 3">
+        <div class="w-top">
+          <div class="w-num">
+            <div class="w-badge">03</div>
+            <div>
+              <div class="w-label">Неделя 3</div>
+              <div class="w-date">{{WEEK_3_DATE}}</div>
+            </div>
+          </div>
+          <div class="w-metric">
+            <span class="lbl">Метрика</span>
+            <span class="val">{{WEEK_3_METRIC}}</span>
+          </div>
+        </div>
+
+        <div class="w-goal">{{WEEK_3_GOAL}}</div>
+
+        <div class="w-body">
+          <div class="w-tasks">
+            <div class="subhead">Задачи недели</div>
+            <ul class="tasks">{{WEEK_3_TASKS}}</ul>
+          </div>
+          <div class="w-side">
+            <div class="subhead">Агенты</div>
+            <div class="chips">{{WEEK_3_AGENTS}}</div>
+            <div class="artifact" title="Артефакт недели">
+              <div class="ico" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="t">
+                <span class="lbl">Артефакт на выходе</span>
+                <span class="val">{{WEEK_3_ARTIFACT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ WEEK 4 ============ -->
+      <article class="week {{WEEK_4_STATUS}}" aria-label="Неделя 4">
+        <div class="w-top">
+          <div class="w-num">
+            <div class="w-badge">04</div>
+            <div>
+              <div class="w-label">Неделя 4</div>
+              <div class="w-date">{{WEEK_4_DATE}}</div>
+            </div>
+          </div>
+          <div class="w-metric">
+            <span class="lbl">Метрика</span>
+            <span class="val">{{WEEK_4_METRIC}}</span>
+          </div>
+        </div>
+
+        <div class="w-goal">{{WEEK_4_GOAL}}</div>
+
+        <div class="w-body">
+          <div class="w-tasks">
+            <div class="subhead">Задачи недели</div>
+            <ul class="tasks">{{WEEK_4_TASKS}}</ul>
+          </div>
+          <div class="w-side">
+            <div class="subhead">Агенты</div>
+            <div class="chips">{{WEEK_4_AGENTS}}</div>
+            <div class="artifact" title="Артефакт недели">
+              <div class="ico" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="t">
+                <span class="lbl">Артефакт на выходе</span>
+                <span class="val">{{WEEK_4_ARTIFACT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ WEEK 5 ============ -->
+      <article class="week {{WEEK_5_STATUS}}" aria-label="Неделя 5">
+        <div class="w-top">
+          <div class="w-num">
+            <div class="w-badge">05</div>
+            <div>
+              <div class="w-label">Неделя 5</div>
+              <div class="w-date">{{WEEK_5_DATE}}</div>
+            </div>
+          </div>
+          <div class="w-metric">
+            <span class="lbl">Метрика</span>
+            <span class="val">{{WEEK_5_METRIC}}</span>
+          </div>
+        </div>
+
+        <div class="w-goal">{{WEEK_5_GOAL}}</div>
+
+        <div class="w-body">
+          <div class="w-tasks">
+            <div class="subhead">Задачи недели</div>
+            <ul class="tasks">{{WEEK_5_TASKS}}</ul>
+          </div>
+          <div class="w-side">
+            <div class="subhead">Агенты</div>
+            <div class="chips">{{WEEK_5_AGENTS}}</div>
+            <div class="artifact" title="Артефакт недели">
+              <div class="ico" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="t">
+                <span class="lbl">Артефакт на выходе</span>
+                <span class="val">{{WEEK_5_ARTIFACT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ WEEK 6 ============ -->
+      <article class="week {{WEEK_6_STATUS}}" aria-label="Неделя 6">
+        <div class="w-top">
+          <div class="w-num">
+            <div class="w-badge">06</div>
+            <div>
+              <div class="w-label">Неделя 6 · финал</div>
+              <div class="w-date">{{WEEK_6_DATE}}</div>
+            </div>
+          </div>
+          <div class="w-metric">
+            <span class="lbl">Метрика</span>
+            <span class="val">{{WEEK_6_METRIC}}</span>
+          </div>
+        </div>
+
+        <div class="w-goal">{{WEEK_6_GOAL}}</div>
+
+        <div class="w-body">
+          <div class="w-tasks">
+            <div class="subhead">Задачи недели</div>
+            <ul class="tasks">{{WEEK_6_TASKS}}</ul>
+          </div>
+          <div class="w-side">
+            <div class="subhead">Агенты</div>
+            <div class="chips">{{WEEK_6_AGENTS}}</div>
+            <div class="artifact" title="Артефакт недели">
+              <div class="ico" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="t">
+                <span class="lbl">Артефакт на выходе</span>
+                <span class="val">{{WEEK_6_ARTIFACT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <span>Обновляется Стратегом еженедельно · после weekly check-in</span>
+    <span class="mark">Последнее обновление: {{LAST_UPDATE}}</span>
+  </footer>
+
+</main>
+
+</body>
+</html>
