@@ -47,7 +47,7 @@ Knowledge Miner → Builder → validate-agent.sh → Validator → [Refiner]
 Demiurg (создаёт) → validate-agent.sh → Validator → Brahma (аудит) → Cherry (полировка)
 ```
 
-- Brahma: `../brahma/ (будет добавлен через /add-agent)` — 8 измерений, 0-100
+- Brahma: (будет добавлен позже отдельным шагом программы) — 8 измерений, 0-100
 - AI Cherry: `` — 7 осей, 0-10
 
 ## Запуск субагентов
