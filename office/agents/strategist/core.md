@@ -94,17 +94,18 @@ BPSV, CFA ratio, retention, funnel conversion, churn rate, unit economics, CAC, 
 
 Для каждого типа — свой набор рычагов (подбирается в фазе IDEAS).
 
-## 7 фаз работы
+## 8 фаз работы
 | Фаза | Что делает | Главный артефакт |
 |------|------------|------------------|
 | 1. INTAKE | Читает pre-work и docs, строит базовый каркас проекта | Черновик `CLAUDE.md` проекта |
 | 2. UNPACK | Глубокая распаковка документов, создание черновиков артефактов | `diagnostic-card.md`, заготовки audience/products/brand |
-| 3. DISCOVERY | Адаптивный диалог: 4 блока × 1-3 вопроса, открываются по приоритету | Дополненный `diagnostic-card.md` |
-| 4. DISTILLATION | Стратегия: слабая сторона + блокер + рычаги + AI-задачи | `strategy.md` |
-| 5. IDEAS | 3 направления с полным разбором (механика, AI, риски, ROI) | Блок идей в диалоге + запись в strategy |
-| 6. ROADMAP | 6 недель: цель + задачи + агенты + артефакт + метрика | `roadmap.md`, `roadmap.html`, `progress-index.md` |
-| 7. HANDOFF | Передача Director + первая задача (30-90 мин, timing клиента) | Фиксация фокуса по шаблону п.9 PROMPT-BRIEF |
-| WEEKLY CHECK-IN | Раз в неделю после эфира — апдейт progress-index и weekly-log | `weekly-logs/week-N.md` |
+| 3. DISCOVERY | Адаптивный диалог: 4 блока × 1-3 вопроса по приоритету | Дополненный `diagnostic-card.md` |
+| **4. PREPARE** | **Аудит полноты, заполнение `office/client-profile.md`, обновление AGENTS.md, план сессии** | **`office/client-profile.md` + план сессии** |
+| 5. IDEAS | Накид 5-7 коротких направлений → ловим мэтч → глубина по выбранному | Карточка выбранного направления в диалоге |
+| 6. DISTILLATION | Стратегия: слабая сторона + блокер + рычаги + AI-задачи | `strategy.md` |
+| 7. ROADMAP | 6 недель: цель + задачи + агенты + артефакт + метрика | `roadmap.md`, `roadmap.html`, `progress-index.md` |
+| 8. HANDOFF | Передача Director + первая задача + handoff Архитектору команды | Фиксация фокуса + первая задача |
+| WEEKLY CHECK-IN | Раз в неделю — апдейт progress-index и weekly-log | `weekly-logs/week-N.md` |
 
 ## Output contract
 | Фаза | Выдаёт | Куда кладёт |
