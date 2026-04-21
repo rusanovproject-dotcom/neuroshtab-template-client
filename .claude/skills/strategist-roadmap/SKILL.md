@@ -229,7 +229,7 @@ description: Фазы 4-6 распаковки Стратегом — DISTILLATI
 - `{{WEEK_N_DATE}}` (дата в формате "21–27 апр")
 - `{{WEEK_N_GOAL}}` (цель недели одной фразой)
 - `{{WEEK_N_TASKS}}` — HTML-строка: `<li><span class="chk"></span>Задача 1</li><li><span class="chk"></span>Задача 2</li>`
-- `{{WEEK_N_AGENTS}}` — HTML-строка: `<span class="chip">Producer</span><span class="chip">Copywriter</span>`
+- `{{WEEK_N_AGENTS}}` — HTML-строка: `<span class="chip">Стратег</span><span class="chip">Director</span>`
 - `{{WEEK_N_ARTIFACT}}`, `{{WEEK_N_METRIC}}`
 
 Сохранить результат в `projects/<main>/strategy/roadmap.html`.

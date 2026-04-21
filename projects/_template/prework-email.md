@@ -2,7 +2,7 @@
 title: "Pre-work письмо — перед вебинаром"
 type: email-template
 status: template
-agent: copywriter
+agent: strategist
 tags: [onboarding, prework, webinar, email]
 placeholders:
   - "{{FIRST_NAME}}"

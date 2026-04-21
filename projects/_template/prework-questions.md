@@ -2,7 +2,7 @@
 title: "Pre-work — вопросы для AI-офиса"
 type: prework
 status: template
-agent: copywriter
+agent: strategist
 tags: [onboarding, prework, intake, questions]
 summary: "15 вопросов + инструкция по документам. Клиент заполняет до вебинара и присылает организатору."
 ---
