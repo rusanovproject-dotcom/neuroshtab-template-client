@@ -525,4 +525,4 @@
 
 ---
 
-*Источник: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT License). Адаптировано: выборка 40 ниш из colors.csv + typography.csv под русскоязычную аудиторию Никиты (эксперты, коучи, курсы, B2B-услуги, SaaS, e-commerce).*
+*Источник: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT License). Адаптировано: выборка 40 ниш из colors.csv + typography.csv под русскоязычную аудиторию (эксперты, коучи, курсы, B2B-услуги, SaaS, e-commerce).*

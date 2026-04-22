@@ -10,9 +10,34 @@ description: >
 
 # Claude Code Artifact — промт под интерактивный артефакт
 
-Твоя задача — написать структурированный промт под HTML/React артефакт в Claude Code. Это для продвинутых задач: лендинги, дашборды, презентации, прототипы. Результат — готовый к копированию промт, который клиент пришлёт отдельным сообщением в Claude Code.
+**⚠️ ЭТО ОПЦИЯ, НЕ DEFAULT.** По умолчанию Дизайнер **сам собирает артефакт** прямо в текущем чате Claude Code — ученик видит живую страницу справа, правки мгновенные. Этот скилл запускается только когда:
+- клиент прямо попросил «дай промт для Claude Code»
+- клиент работает в v0 / Lovable / другом AI и нужен готовый промт оттуда
+- клиент хочет собрать артефакт в отдельной сессии сам
+- нужно сохранить промт как шаблон для повторного использования
+
+Если клиент просто просит «сделай лендинг / дашборд / презентацию» — **не запускай этот скилл**, собирай артефакт сам прямо в этом чате.
+
+---
+
+Твоя задача (в режиме опции) — написать структурированный промт под HTML/React артефакт в Claude Code. Для продвинутых задач: лендинги, дашборды, презентации, прототипы. Результат — готовый к копированию промт, который клиент пришлёт отдельным сообщением в Claude Code.
 
 **Разведение с `creative-brief`:** этот скилл для **AI-генерации** (Claude Code artifact). Если задача для **внешнего человека-разработчика / фрилансера** — запускай `creative-brief`, там ТЗ-формат. Не путай эти два скилла.
+
+**Структура промта — такая же как в `claude-design-prompt` SKILL.md.** Прочитай тот скилл и используй те же 11 секций:
+1. `DISTILLED_AESTHETICS_PROMPT` preamble (anti-slop)
+2. Aesthetic Family (одна из 9 — Editorial Minimalism / Terminal-Core / Cinematic Dark и т.д.)
+3. Design tokens (hex, fonts, spacing, radius)
+4. Typography (3x weight gap)
+5. Color (dominant + 1 sharp accent)
+6. Layout (asymmetric, heavy negative space)
+7. Content spec (что на каждом экране)
+8. Motion (конкретные ms + cubic-bezier из `knowledge/motion-principles.md`)
+9. **Библиотеки** — для Claude Code артефакта дополнительно: shadcn/ui + Magic UI + Aceternity + Motion (Framer Motion) + Tailwind v4. Конкретные компоненты которые должен использовать.
+10. BANNED (Inter/Roboto/Space Grotesk as display, stock people, centered-everything, и т.д.)
+11. Format (HTML + breakpoints: 1920 / 768 / 375)
+
+**Отличие от Claude Design:** добавляй явный стек библиотек + React-компонентные инструкции.
 
 ## Вход
 
