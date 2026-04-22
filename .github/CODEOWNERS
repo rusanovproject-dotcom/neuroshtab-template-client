@@ -1,0 +1,5 @@
+# CODEOWNERS — подсказка GitHub'у кого звать на review.
+# Владелец @rusanovproject-dotcom (Никита), напарник @skarbitra-debug.
+
+# По умолчанию — оба ревьюят
+*                @rusanovproject-dotcom @skarbitra-debug
