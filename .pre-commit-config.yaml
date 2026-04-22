@@ -1,0 +1,23 @@
+# Запускается при каждом `git commit`.
+# Установка: pip install pre-commit && pre-commit install
+# Источник правды: Bitwarden (см. office/hub/ops/SECRETS-ROUTING.md)
+
+repos:
+  # Базовые проверки: trailing whitespace, merge conflicts, большие файлы
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: detect-private-key
+
+  # Сканер секретов — блокирует коммит если в staged есть токены
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
