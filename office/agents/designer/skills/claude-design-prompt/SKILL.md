@@ -10,12 +10,12 @@ description: >
 
 # Claude Design Prompt — эталонная структура премиум-промта
 
-**⚠️ ЭТО ОПЦИЯ, НЕ DEFAULT.** По умолчанию Дизайнер **сам делает** через claude.ai/design и отдаёт клиенту готовое. Этот скилл запускается только когда:
-- клиент прямо попросил «дай промт, я сам вставлю»
-- клиент хочет сделать шаг сам (часть обучения)
-- нет Claude Pro у Дизайнера, промт нужен клиенту для самостоятельной работы
+**⚠️ ЭТО ОПЦИЯ, НЕ DEFAULT.** По умолчанию Дизайнер **сам делает** через claude.ai/design и отдаёт пользователю готовое. Этот скилл запускается только когда:
+- пользователь прямо попросил «дай промт, я сам вставлю»
+- пользователь хочет сделать шаг сам (часть обучения)
+- нет Claude Pro у Дизайнера, промт нужен пользователю для самостоятельной работы
 
-Если клиент просто просит «сделай обложку» — **не запускай этот скилл**, делай сам.
+Если пользователь просто просит «сделай обложку» — **не запускай этот скилл**, делай сам.
 
 ---
 
@@ -125,9 +125,9 @@ Typography: display Unbounded Black 120-180pt, body Söhne 24-32pt. Radius: 4px 
 
 ## Вход (что ты подтягиваешь перед написанием)
 
-- **Brand Book клиента** — `knowledge/brand/{project}/brand-book.md`. Если файла нет — **остановись** и запусти `brand-onboarding`.
+- **Brand Book пользователя** — `knowledge/brand/{project}/brand-book.md`. Если файла нет — **остановись** и запусти `brand-onboarding`.
 - **Тип дизайна** — из `knowledge/design-catalog.md`
-- **Aesthetic Family** — определи сам из контекста клиента или спроси
+- **Aesthetic Family** — определи сам из контекста пользователя или спроси
 - **Специфика запроса** — что именно делаем
 
 ---
@@ -138,13 +138,13 @@ Typography: display Unbounded Black 120-180pt, body Söhne 24-32pt. Radius: 4px 
 Вытащи: hex-коды, точные названия шрифтов, настроение, запреты, do/don't.
 
 ### 2. Определи Aesthetic Family
-Из таблицы 9 штук. Учти нишу клиента:
+Из таблицы 9 штук. Учти нишу пользователя:
 - Онлайн-курс / эксперт → **Editorial Minimalism** или **Cult/Indie**
 - AI-продукт → **Terminal-Core** или **Cinematic Dark**
 - Consumer-app → **Playful Color** или **Glass/Soft-Futurism**
 - B2B SaaS → **Editorial Minimalism** или **Data-Dense Pro**
 
-**НЕ Warm Editorial**, если клиент специально не хочет «как у Claude/Notion».
+**НЕ Warm Editorial**, если пользователь специально не хочет «как у Claude/Notion».
 
 ### 3. Определи режим Claude Design
 - **Prototype** (UI/UX, артефакты) — 2 подрежима: Wireframe (экономит токены) → High-fidelity
@@ -169,7 +169,7 @@ Typography: display Unbounded Black 120-180pt, body Söhne 24-32pt. Radius: 4px 
 - Centered-everything
 - "Innovative / cutting-edge" wording
 
-Плюс специфичные для ниши клиента из Brand Book.
+Плюс специфичные для ниши пользователя из Brand Book.
 
 ### 7. Объясни куда копировать
 
@@ -183,7 +183,7 @@ Typography: display Unbounded Black 120-180pt, body Söhne 24-32pt. Radius: 4px 
 Заказывай ползунки в промте: *«Make tweakable: accent color (hex), border-radius (0-20px), font size (14-20px), stagger duration (40-120ms)»*. Ползунки **не потребляют токены** — live-редактирование без регенерации.
 
 ### Design System
-Если у клиента есть сайт — укажи в промте: *«Design System: match styling of https://example.com (colors, typography, spacing)»*. Claude скрапит за 15 мин при настройке DS.
+Если у пользователя есть сайт — укажи в промте: *«Design System: match styling of https://example.com (colors, typography, spacing)»*. Claude скрапит за 15 мин при настройке DS.
 
 ### Comment vs Chat
 В промте можно написать: *«Elements that will likely need inline editing (labels, CTAs, prices) — make them individually selectable for Comment mode»*. Comment точнее чем правки через общий чат.
