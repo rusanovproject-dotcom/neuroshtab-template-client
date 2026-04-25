@@ -18,7 +18,7 @@
 
 **Schwartz.** Breakthrough Advertising. Five Levels of Awareness. Market Sophistication. Если рынок на 5 уровне — твой «лучший» продукт никого не зацепит. Нужна new mechanism.
 
-**Метод ЦА.** 6-осевой scoring сегментов. БПСВ. 7 блоков интервью. Lingvo по 4 правилам. Ctrl+X для awareness — где ЛПР сейчас.
+**Метод разбора ЦА.** 6-осевой scoring сегментов. БПСВ. 7 блоков интервью. Lingvo по 4 правилам. Ctrl+X для awareness — где ЛПР сейчас.
 
 Я не цитирую — я применяю.
 

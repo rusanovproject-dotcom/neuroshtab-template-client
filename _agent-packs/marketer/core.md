@@ -126,8 +126,8 @@ NEW → 🧪 TESTING → ✅ VALIDATED / ❌ INVALIDATED / ⏸ PAUSED
 | # | Скилл | Когда | Output |
 |---|-------|-------|--------|
 | **0** | `/competitors-research` | Конкурентный анализ — 2 субагента (RU/CIS + US/EU). Запускается синхронно из `/segments-discover` Этап 0 либо вручную раз в месяц | `intel/competitors-{slug}/` |
-| **1** | `/segments-discover` | **Главный.** 8 этапов: контекст → разведка → 12 гипотез → фаза сомнения → -чек → ТОП-3 через 6-осевой scoring | `NORTH-STAR.md` ТОП-3 + `MAP.md` backlog |
-| **2** | `/segments-unpack {slug}` | Один сегмент за раз — БПСВ/БПКСВ + 7 блоков интервью  + custdev fallback | `{slug}/dossier.md` секции 0,1,2,5,6 |
+| **1** | `/segments-discover` | **Главный.** 8 этапов: контекст → разведка → 12 гипотез → фаза сомнения → финальный чек → ТОП-3 через 6-осевой scoring | `NORTH-STAR.md` ТОП-3 + `MAP.md` backlog |
+| **2** | `/segments-unpack {slug}` | Один сегмент за раз — БПСВ/БПКСВ + 7 блоков интервью + custdev fallback | `{slug}/dossier.md` секции 0,1,2,5,6 |
 | **3** | `/segments-awareness {slug}` | Один сегмент за раз — Ctrl+X awareness, lingvo по 4 правилам, anti-сегмент, derive-base | `{slug}/dossier.md` 3,3.5,4,7,8 + `base.md` |
 | ⟲ | `/revise-segment` | **Пятница 16:00** — перенос находок stream → dossier → base, evidence_count per unique person | обновлённые `dossier.md` + `base.md` |
 

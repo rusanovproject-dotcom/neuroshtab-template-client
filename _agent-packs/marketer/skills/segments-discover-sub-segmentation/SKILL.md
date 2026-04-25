@@ -16,7 +16,7 @@ clone_of: knowledge-alchemist/01-segmentation
 
 ---
 
-> Методическая методология: 3W модель (What-Why-Who) + User Research
+> Базовая методика: 3W модель (What-Why-Who) + User Research
 >
 > **КОГДА ЭТО ИСПОЛЬЗОВАТЬ:**
 > - Запускаешь новый продукт/услугу (или переработал старый)
@@ -374,7 +374,7 @@ WHO ДЛЯ КАЖДОГО WHY (КТО):
 
 ---
 
-**Версия:** v2.1 (Based on  Course, Module 1, Lesson 1)
-**Автор методологии:** маркетинговая методология (marketer, researcher)
+**Версия:** v2.1 (Based on the source course, Module 1, Lesson 1)
+**Автор методологии:** автор исходного курса
 **Создатель скилла:** Knowledge Alchemist
 **Дата:** 2026-03-24

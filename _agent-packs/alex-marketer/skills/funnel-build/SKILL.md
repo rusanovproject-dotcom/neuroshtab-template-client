@@ -42,7 +42,7 @@ mode: interactive (stop+wait после каждого шага)
 | Файл | Что нужно | Если нет |
 |---|---|---|
 | `audience/segments/{slug}/dossier.md` | Секции 0 (профиль), 1 (БПСВ), 2 (интервью), 3 (awareness/Ctrl+X) заполнены | → стоп, `/segments-unpack` + `/segments-awareness` |
-| `audience/segments/{slug}/base.md` | Желаемый контент (блок 2.7 ), редполитика | мягкое — продолжаем, но Шаг 3 ослаблен |
+| `audience/segments/{slug}/base.md` | Желаемый контент (блок 2.7 — желаемый контент), редполитика | мягкое — продолжаем, но Шаг 3 ослаблен |
 | `product/core-offer.md` | Value Equation + Grand Slam стек | → стоп, `/unpack-product` |
 | `product/ladder.md` | LM → TW → Core → PM прорисованы | → стоп, `/unpack-product` |
 | `brand/competitors.md` | Конкурентные механики воронок | мягкое — отмечаем gap |
