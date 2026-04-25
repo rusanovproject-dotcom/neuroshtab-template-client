@@ -97,6 +97,44 @@ Python 3 обычно есть везде где Claude Code. Это более 
 
 Запомни переменную `$REMOTE` для следующих шагов.
 
+### Шаг 2.5. Detect пользовательские правки в template-managed файлах
+
+**Цель:** не затереть silent правки пользователя в template-файлах (CLAUDE.md root, AGENTS.md, core.md агентов).
+
+```bash
+# Получи свежий снимок template (без merge)
+git fetch $REMOTE main 2>/dev/null
+
+# Сравни ключевые template-managed файлы
+TEMPLATE_FILES=("CLAUDE.md" "office/AGENTS.md" "office/STRUCTURE.md" "README.md")
+USER_MODIFIED=()
+
+for f in "${TEMPLATE_FILES[@]}"; do
+  if [[ -f "$f" ]]; then
+    # Сравнить с upstream
+    if ! git diff --quiet $REMOTE/main -- "$f" 2>/dev/null; then
+      USER_MODIFIED+=("$f")
+    fi
+  fi
+done
+
+# Также проверить core.md всех агентов
+for agent_dir in office/agents/*/; do
+  core="$agent_dir/core.md"
+  if [[ -f "$core" ]] && ! git diff --quiet $REMOTE/main -- "$core" 2>/dev/null; then
+    USER_MODIFIED+=("$core")
+  fi
+done
+```
+
+**Если `USER_MODIFIED` не пустой** — скажи пользователю по-человечески:
+
+> *"Заметил, что ты правил несколько системных файлов: [перечислить]. Свежая версия их обновит и твои правки уйдут. Сохраню копии в `.claude/user-edits-2026-04-25/<file>.md`, чтобы ты мог их посмотреть после обновления и при желании перенести в `overrides.md`. Ок?"*
+
+Если пользователь говорит «да / ок» — копируешь все `USER_MODIFIED` в `$BACKUP/user-edits-pre-update/` и в `.claude/user-edits-<timestamp>/` (видимое место для пользователя). Если «нет» — стоп, не обновляем (пусть сначала перенесёт правки в overrides).
+
+**Зачем:** пользовательские правки в root CLAUDE.md или core.md имеют шанс быть осмысленными (custom Tier-определения, кодовые слова, спецправила). Silent overwrite таких правок = потеря работы. Пусть он осознанно решит.
+
 ### Шаг 3. BACKUP — сохраняем ВСЁ что может быть пользовательским
 
 Создай директорию `/tmp/office-backup-$(date +%Y%m%d-%H%M%S)/` и назови её `$BACKUP`.
