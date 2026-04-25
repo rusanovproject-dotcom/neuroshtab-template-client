@@ -3,7 +3,7 @@ name: segments-awareness-sub-ctrlx
 parent_orchestrator: /segments-awareness
 clone_of: knowledge-alchemist/04-awareness-levels
 description: >
-  Распределяет тезисы респондентов по 4 уровням осознанности (Шварц/Кадыров):
+  Распределяет тезисы респондентов по 4 уровням осознанности (Шварц):
   Indifference → Awareness → Consideration → Choice. На входе: данные Users Research
   (тезисы от 6 респондентов по 3 сегментам). На выходе: заполненная матрица осознанности
   + точки входа/выхода для каждого сегмента + стратегия воронки.
@@ -25,9 +25,9 @@ description: >
   - Нет описания сегментов → сначала 02-segment-description
 ---
 
-# Уровни осознанности — Распределение по Шварцу/Кадырову — клон под `/segments-awareness`
+# Уровни осознанности — Распределение по Шварцу — клон под `/segments-awareness`
 
-> **Это клон.** Источник — `knowledge-alchemist/04-awareness-levels/SKILL.md` (не правится). Здесь — адаптация под пайплайн `audience/segments/`. Методология Шварца / Кадырова (4 уровня + Тема vs Продукт) **остаётся как есть**.
+> **Это клон.** Источник — `knowledge-alchemist/04-awareness-levels/SKILL.md` (не правится). Здесь — адаптация под пайплайн `audience/segments/`. Методология Шварца (4 уровня + Тема vs Продукт) **остаётся как есть**.
 >
 > **Контракт ввода:** оркестратор `/segments-awareness` запускает клон **по одному сегменту за раз** после того как Скилл №2 заполнил секции 0–2 dossier. Клон читает `audience/segments/{slug}/dossier.md` секцию 2.x (данные интервью — дословные цитаты респондентов) и `audience/segments/{slug}/awareness-workspace.md` если оркестратор уже подготовил рабочее пространство для ритуала Ctrl+X (см. `audience/segments/_pipeline/awareness-distribution.md`).
 >
@@ -233,4 +233,4 @@ Output:
 
 ---
 
-**Версия:** v1.0 | Методология: Шварц / Кадыров | Создатель: Knowledge Alchemist | 2026-03-26
+**Версия:** v1.0 | Методология: Шварц | Создатель: Knowledge Alchemist | 2026-03-26

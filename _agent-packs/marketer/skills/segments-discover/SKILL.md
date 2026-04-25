@@ -1,6 +1,6 @@
 ---
 name: segments-discover
-description: Сегментация ЦА по Кадырову — 8 этапов от контекст-сбора до отбора ТОП-3 через 6-осевой scoring. Запускает /competitors-research синхронно в начале Этапа 0. Авто-определение режима (established/early-stage/greenfield). Stop+wait чек-поинты. Reviewer-субагент на финальном ревью ТОП-3. TRIGGERS — "распакуй ЦА", "новый сегмент", "сегментация", "/segments-discover", "найди сегменты", "разберись с ЦА", "разбери аудиторию".
+description: Сегментация ЦА — 8 этапов от контекст-сбора до отбора ТОП-3 через 6-осевой scoring. Запускает /competitors-research синхронно в начале Этапа 0. Авто-определение режима (established/early-stage/greenfield). Stop+wait чек-поинты. Reviewer-субагент на финальном ревью ТОП-3. TRIGGERS — "распакуй ЦА", "новый сегмент", "сегментация", "/segments-discover", "найди сегменты", "разберись с ЦА", "разбери аудиторию".
 parent_orchestrator: /segments-discover (главный)
 mode: interactive (stop+wait checkpoints)
 ---
@@ -20,7 +20,7 @@ mode: interactive (stop+wait checkpoints)
 - конкурентной разведки (`/competitors-research`, синхронный запуск),
 - живого диалога с клиентом (9 вопросов в Этапе 0 + 4 чек-поинта).
 
-На выходе — заполненный `NORTH-STAR.md` секция ТОП-3, минимум 7 backlog-гипотез в `MAP.md`, чек-лист Кадырова и независимое ревью.
+На выходе — заполненный `NORTH-STAR.md` секция ТОП-3, минимум 7 backlog-гипотез в `MAP.md`, чек-лист  и независимое ревью.
 
 ---
 
@@ -52,7 +52,7 @@ mode: interactive (stop+wait checkpoints)
 | `audience/segments/MAP.md` | ≥ 7 backlog-гипотез (12 минус 3 ТОП) со статусом 🔴/🟡 |
 | `audience/segments/SOURCES.md` | Все источники, упомянутые в Этапах 1–2 |
 | `audience/segments/_pipeline/discover-workspace.md` | Рабочий буфер: контекст, проблемы, 3W-гипотезы, фаза сомнения, scoring |
-| `audience/segments/_pipeline/kadyrov-checklist-{slug}.md` | Чек-лист 9 шагов методологии Кадырова |
+| `audience/segments/_pipeline/audience-checklist-{slug}.md` | Чек-лист 9 шагов методологии |
 | `intel/competitors-{slug}/` | Результаты Скилла №0 (создаются синхронно в Этапе 0) |
 
 ---
@@ -193,7 +193,7 @@ mode: interactive (stop+wait checkpoints)
 
 ### Этап 3 — Извлечение проблем + потребностей (диалог)
 
-**Цель:** собрать список из 8–12 проблем (Кадыров: «10–20 проблем без фильтра») и зеркальных потребностей. Уже не из головы, а из Этапов 1+2.
+**Цель:** собрать список из 8–12 проблем (методология: «10–20 проблем без фильтра») и зеркальных потребностей. Уже не из головы, а из Этапов 1+2.
 
 **Действия:**
 
@@ -223,9 +223,9 @@ mode: interactive (stop+wait checkpoints)
 
 ### Этап 4 — 3W генератор гипотез
 
-**Цель:** прогнать каждую потребность через **What → Why → Who** и получить **минимум 12 гипотез сегментов** (Кадыров: 10–20).
+**Цель:** прогнать каждую потребность через **What → Why → Who** и получить **минимум 12 гипотез сегментов** (: 10–20).
 
-**Внимание — 3W, не 5W.** Where и When — это **атрибуты Who**, не отдельные оси. Это финальное решение Кадырова, в `_pipeline/segmentation-3w.md` оно зафиксировано.
+**Внимание — 3W, не 5W.** Where и When — это **атрибуты Who**, не отдельные оси. Это финальное решение методики, в `_pipeline/segmentation-3w.md` оно зафиксировано.
 
 **Подскилл-помощник:** `segments-discover-sub-segmentation` (клон 01-segmentation knowledge-alchemist) — это **внутренний движок** Этапа 4. Он живёт в `client-office-template/_agent-packs/marketer/skills/segments-discover-sub-segmentation/SKILL.md`. Output контракт у него уже изменён — он пишет в `discover-workspace.md` секции `## Фаза 1`–`## Фаза 4`. Скилл №1 вызывает его как helper и забирает результат в свой workspace.
 
@@ -275,7 +275,7 @@ mode: interactive (stop+wait checkpoints)
 
 ### Этап 6 — Фаза сомнения (КРИТИЧНО)
 
-**Цель:** перед глубоким scoring — заставить скилл **усомниться в себе**. Это защита от самообмана, на которой Кадыров настаивает явно.
+**Цель:** перед глубоким scoring — заставить скилл **усомниться в себе**. Это защита от самообмана, на которой методика настаивает явно.
 
 Скилл задаёт **5 контрольных вопросов сам себе**, отвечает текстом в `discover-workspace.md` секцию «Фаза сомнения». Если ответ хоть на один — «не уверен» — скилл показывает клиенту самокритику и просит подтвердить или переделать.
 
@@ -323,14 +323,14 @@ mode: interactive (stop+wait checkpoints)
 
 ---
 
-### Этап 7 — Сверка с картой Кадырова
+### Этап 7 — Сверка с картой методики
 
-**Цель:** убедиться, что прошли все 9 шагов методики Кадырова из `knowledge/audience/kadyrov-ua-mindmap.md` Урок 1.1.
+**Цель:** убедиться, что прошли все 9 шагов методики из `knowledge/audience/ua-mindmap.md` Урок 1.1.
 
-**Действия.** Скилл генерирует чек-лист `audience/segments/_pipeline/kadyrov-checklist-{slug}.md`:
+**Действия.** Скилл генерирует чек-лист `audience/segments/_pipeline/audience-checklist-{slug}.md`:
 
 ```markdown
-# Чек-лист Кадырова — {slug}
+# Чек-лист  — {slug}
 
 0. ☐ Список проблем и потребностей собран (минимум 8 пар)
 1. ☐ What задан и получен (что покупает / делает) — для каждой потребности
@@ -387,7 +387,7 @@ mode: interactive (stop+wait checkpoints)
   СУММА: NN/30
 ```
 
-**Балл без anchor — невалидный.** Скилл не пишет «5 — потому что чувствую». Только «5 (anchor: L4 choice) — потому что 4 из 5 платящих в clients/ уже сравнивали Иван и Кадыров».
+**Балл без anchor — невалидный.** Скилл не пишет «5 — потому что чувствую». Только «5 (anchor: L4 choice) — потому что 4 из 5 платящих в clients/ уже сравнивали [конкурент 1] и [конкурент 2]».
 
 3. **Применить пороги:**
    - **Hot:** сумма ≥ 22 И горячесть ≥ 4
@@ -504,7 +504,7 @@ mode: interactive (stop+wait checkpoints)
 | `audience/segments/_pipeline/discover-workspace.md` | «3W-гипотезы» | Этап 4 |
 | `audience/segments/_pipeline/discover-workspace.md` | «Фаза сомнения» | Этап 6 |
 | `audience/segments/_pipeline/discover-workspace.md` | «Scoring» | Этап 8 |
-| `audience/segments/_pipeline/kadyrov-checklist-{slug}.md` | 9 пунктов методологии | Этап 7 |
+| `audience/segments/_pipeline/audience-checklist-{slug}.md` | 9 пунктов методологии | Этап 7 |
 | `intel/competitors-{slug}/` | Создаётся Скиллом №0 (синхронно в Этапе 0 Шаг 3) | Этап 0 Шаг 3 |
 
 ---
@@ -533,7 +533,7 @@ mode: interactive (stop+wait checkpoints)
 - [ ] `SOURCES.md` обновлён всеми использованными источниками
 - [ ] `discover-workspace.md` содержит секцию «Фаза сомнения» с ответами на 5 вопросов
 - [ ] `discover-workspace.md` шапка содержит `mode: established/early-stage/greenfield`
-- [ ] `kadyrov-checklist-{slug}.md` все 9 пунктов отмечены ✓
+- [ ] `audience-checklist-{slug}.md` все 9 пунктов отмечены ✓
 - [ ] `intel/competitors-{slug}/INDEX.md` существует и содержит балл Whitespace (или пометку `[требует ручной валидации]`)
 - [ ] Все 4 чек-поинта stop+wait пройдены (есть отметки в discover-workspace.md)
 - [ ] Reviewer-субагент запущен на чек-поинте 4, его фидбек приложен
@@ -564,7 +564,7 @@ mode: interactive (stop+wait checkpoints)
 - Пишет прямо в `audience/segments/_pipeline/discover-workspace.md` в секции `## Фаза 1`–`## Фаза 4`
 - Финальный отбор ТОП-3 (после 6-осевого scoring оркестратора) переносится в `NORTH-STAR.md` Скиллом №1, не самим подскиллом
 
-**Как использовать:** Скилл №1 на Этапе 4 вызывает его как helper, передаёт `discover-workspace.md` как контракт ввода, забирает результат Фаз 1–4 в свой workspace. Методология Кадырова (3W: What → Why → Who) **остаётся как есть** — мы не правим knowledge-alchemist source, только output-контракт клона.
+**Как использовать:** Скилл №1 на Этапе 4 вызывает его как helper, передаёт `discover-workspace.md` как контракт ввода, забирает результат Фаз 1–4 в свой workspace. Методология (3W: What → Why → Who) **остаётся как есть** — мы не правим knowledge-alchemist source, только output-контракт клона.
 
 ---
 

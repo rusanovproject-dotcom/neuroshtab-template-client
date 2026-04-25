@@ -6,7 +6,7 @@ clone_of: knowledge-alchemist/01-segmentation
 
 # Сегментирование Целевой Аудитории v2.1 — клон под `/segments-discover`
 
-> **Это клон.** Источник — `knowledge-alchemist/01-segmentation/SKILL.md` (не правится, продолжает жить как часть extraction-pipeline). Здесь — адаптация под пайплайн `audience/segments/`. Методология Кадырова (3W: What → Why → Who) **остаётся как есть**.
+> **Это клон.** Источник — `knowledge-alchemist/01-segmentation/SKILL.md` (не правится, продолжает жить как часть extraction-pipeline). Здесь — адаптация под пайплайн `audience/segments/`. Методология (3W: What → Why → Who) **остаётся как есть**.
 >
 > **Контракт ввода:** читает `audience/segments/_pipeline/discover-workspace.md` (рабочее пространство Скилла №1, создаётся оркестратором на Этапе 0). Там — описание продукта, проблемно-потребностный брейнсторм, контекст из Скилла №0 `/competitors-research`.
 >
@@ -16,7 +16,7 @@ clone_of: knowledge-alchemist/01-segmentation
 
 ---
 
-> Кадыровская методология: 3W модель (What-Why-Who) + User Research
+> Методическая методология: 3W модель (What-Why-Who) + User Research
 >
 > **КОГДА ЭТО ИСПОЛЬЗОВАТЬ:**
 > - Запускаешь новый продукт/услугу (или переработал старый)
@@ -288,7 +288,7 @@ WHO ДЛЯ КАЖДОГО WHY (КТО):
 
 ---
 
-### ПРИМЕР 2: Автоворонки (Кадыров)
+### ПРИМЕР 2: Автоворонки
 
 **INPUT:**
 - Курс по автоворонкам для инфопродюсеров
@@ -374,7 +374,7 @@ WHO ДЛЯ КАЖДОГО WHY (КТО):
 
 ---
 
-**Версия:** v2.1 (Based on Kadyrov Course, Module 1, Lesson 1)
-**Автор методологии:** Никита Кадыров (marketer, researcher)
+**Версия:** v2.1 (Based on  Course, Module 1, Lesson 1)
+**Автор методологии:** маркетинговая методология (marketer, researcher)
 **Создатель скилла:** Knowledge Alchemist
 **Дата:** 2026-03-24

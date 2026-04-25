@@ -57,7 +57,7 @@ triggers:
 - `inbox/` — транскрипты созвонов, касдевы, прислан материал
 
 **Внутренняя библия агента:**
-- `office/agents/marketer/knowledge/kadyrov-3w-bpsv.md`
+- `office/agents/marketer/knowledge/audience-3w-bpsv.md`
 - `office/agents/marketer/knowledge/hormozi-offer-market.md`
 - `office/agents/marketer/knowledge/schwartz-awareness.md`
 
@@ -148,7 +148,7 @@ triggers:
 
 ## Шаг 4. Генерация 10-15 сегментов по 3W
 
-Используй методологию из `knowledge/kadyrov-3w-bpsv.md`.
+Используй методологию из `knowledge/audience-3w-bpsv.md`.
 
 **Процедура:**
 
@@ -239,7 +239,7 @@ triggers:
 
 ### Файл 2: `audience.md` — полная распаковка
 
-Расширенный файл с БПСВ по Кадырову. Структура — в `knowledge/kadyrov-3w-bpsv.md` секция БПСВ.
+Расширенный файл с БПСВ. Структура — в `knowledge/audience-3w-bpsv.md` секция БПСВ.
 
 - Соцдем
 - Три слоя боли (если применимо)
