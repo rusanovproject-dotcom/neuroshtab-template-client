@@ -71,7 +71,7 @@
 ## Зависимости
 
 Модуль работает поверх базового скелета `projects/_template/`. Требует наличия:
-- `audience/voc.md` (для цитат ЦА из транскриптов)
+- `audience/voice-of-customer.md` (для цитат ЦА из транскриптов)
 - `brand/expert-bank.md` (для голоса владельца)
 - `brand/competitors.md` (для упоминаний)
 - `hypotheses.md` (для идей в Backlog из встреч)

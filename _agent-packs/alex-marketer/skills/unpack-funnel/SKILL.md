@@ -4,8 +4,18 @@ description: Оркестратор фазы 3 — распаковка воро
 parent_orchestrator: /unpack-project (фаза 3)
 mode: interactive (stop+wait после каждого сегмента)
 ---
+---
+
+🎙 **ГОЛОС:** прочитай `knowledge/voice.md` ПЕРЕД любой репликой клиенту. Слова «Шаг», «Pre-flight», «AskUserQuestion», «Phase», «Stage Lock», «гейт», «trigger», «mode» — **внутренняя структура для тебя**, в речи клиенту **НЕ произносить**. Стиль = живой партнёр-маркетолог с насмотренностью, не методолог из учебника. Если хоть в одной реплике появилось «Шаг 1 / Phase A / Pre-flight / 4 вопроса по одному» — это робот. Перепиши.
+
 
 # /unpack-funnel — Скилл фазы 3 пайплайна распаковки
+
+📍 **Где это в системе:**
+- **Уровень:** Stage 3 entry point (после Stage 2 — собран `core-offer.md`)
+- **Запускается из:** триггеров клиента («распакуй воронку», «journey», «где у меня течёт»), авто-перехода из `/unpack-project` после Phase 2
+- **Pre-flight БЛОКИРУЕТ если:** нет `core-offer.md`, `ladder.md`, `segment-portrait.md` с заполненным awareness/Ctrl+X для ТОП-сегментов
+- **Передаёт в:** `/funnel-build` (per-segment маршрут, каналы, касания) → готово для копирайтера и Producer
 
 > Это **третья фаза** мета-скилла `/unpack-project` — после распакованной ЦА (фаза 1) и собранного оффера (фаза 2). Здесь Алекс строит **маршрут от первого касания до сделки** для каждого ТОП-сегмента: где сегмент тусуется, какой канал primary, какие лид-магниты и tripwire ведут к Core, какая последовательность касаний нужна, где сейчас протекают деньги.
 >
@@ -47,7 +57,7 @@ mode: interactive (stop+wait после каждого сегмента)
 | Файл | Что нужно | Если нет |
 |---|---|---|
 | `audience/segments/NORTH-STAR.md` | Заполнен ТОП-3 (1 hot + 1 warm + 1 cold) | → `/segments-discover` |
-| `audience/segments/{slug}/dossier.md` | Для каждого ТОП-сегмента — секции 0-3 (awareness/Ctrl+X) | → `/segments-unpack` + `/segments-awareness` |
+| `audience/segments/{slug}/segment-portrait.md` | Для каждого ТОП-сегмента — секции 0-3 (awareness/Ctrl+X) | → `/segments-unpack` + `/segments-awareness` |
 | `product/core-offer.md` | Валидирован (Value Equation заполнена, Grand Slam собран) | → `/unpack-product` |
 | `product/ladder.md` | Лестница LM → TW → Core → PM прорисована | → `/unpack-product` |
 | `brand/competitors.md` | Что делают конкуренты в воронке (хотя бы 3 механики) | мягкое — продолжаем, отметить в Log |
@@ -191,7 +201,7 @@ Stop+wait — ждёт `/accept H{N}` или коррекцию.
 | `funnel/welcome.md` | Последовательность касаний, темы, форматы, CTA | **Владелец** через `/accept H{N}` |
 | `funnel/scripts.md` | Скрипты + банк возражений | **Владелец** через `/accept H{N}` (только если активирован модуль встреч) |
 | `metrics.md` | AUTO-секции по каналам если появились новые цифры | **Алекс** (только AUTO-зоны) |
-| `audience/voc.md` | Возражения / отказы пойманные по ходу разговора | **Алекс** append-only |
+| `audience/voice-of-customer.md` | Возражения / отказы пойманные по ходу разговора | **Алекс** append-only |
 
 **Закон голоса (важно):** Алекс **не перезаписывает** `funnel/channels.md`, `welcome.md`, `scripts.md` напрямую. Он формирует diff-предложение в `hypotheses.md`, владелец принимает командой `/accept H{N}` — только тогда файл вывода обновляется.
 
@@ -204,7 +214,7 @@ Stop+wait — ждёт `/accept H{N}` или коррекцию.
 В этом случае:
 
 - Шаг 3 «Touchpoints» внутри `/funnel-build` **не предлагает** скрипты созвона
-- Возражения копятся в `audience/voc.md` с тегом `#objection`
+- Возражения копятся в `audience/voice-of-customer.md` с тегом `#objection`
 - Эти возражения используются для оптимизации `welcome.md` (текстовые касания закрывают возражения которые в живой беседе закрылись бы продажником)
 - diff в Log идёт только по `channels.md` + `welcome.md`
 
@@ -218,7 +228,7 @@ Stop+wait — ждёт `/accept H{N}` или коррекцию.
 |---|---|---|
 | `/unpack-project` | **Родитель.** Делегирует `/unpack-funnel` как фазу 3 | Из мета-скилла |
 | `/segments-discover` (фаза 1) | Pre-flight: даёт `NORTH-STAR.md` | До запуска |
-| `/segments-unpack` + `/segments-awareness` | Pre-flight: даёт `dossier.md` с awareness/Ctrl+X | До запуска |
+| `/segments-unpack` + `/segments-awareness` | Pre-flight: даёт `segment-portrait.md` с awareness/Ctrl+X | До запуска |
 | `/unpack-product` (фаза 2) | Pre-flight: даёт `core-offer.md` + `ladder.md` | До запуска |
 | `/funnel-build` | **Внутренний движок.** Запускается per-segment в Шаге 2 | На каждом сегменте |
 | `/marketer-revision` | Lite-альтернатива если глубокая распаковка не нужна | вне пайплайна |
@@ -241,14 +251,14 @@ Stop+wait — ждёт `/accept H{N}` или коррекцию.
 - **Канал выбран без обоснования из dossier** («у нас Instagram потому что у всех Instagram») → переделать Шаг 1 в `/funnel-build`
 - **Один маршрут на все сегменты** → красный флаг унификации, разделить per-segment
 - **Скрипты созвона предлагаются без модуля встреч** → удалить, оставить только текстовые касания
-- **Возражения в скриптах — «из головы»** (нет ссылки на `voc.md` или цитаты клиентов конкурентов) → переделать
+- **Возражения в скриптах — «из головы»** (нет ссылки на `voice-of-customer.md` или цитаты клиентов конкурентов) → переделать
 - **Bottleneck-анализ без цифр** («чувствую что течёт здесь») → требовать минимум одну метрику или явную пометку `[нет данных, гипотеза N%]`
 
 ---
 
 ## 10. Acceptance criteria
 
-- [ ] Pre-flight пройден: `NORTH-STAR.md`, `dossier.md` для каждого ТОП-сегмента, `core-offer.md`, `ladder.md` существуют и валидированы
+- [ ] Pre-flight пройден: `NORTH-STAR.md`, `segment-portrait.md` для каждого ТОП-сегмента, `core-offer.md`, `ladder.md` существуют и валидированы
 - [ ] Для каждого ТОП-сегмента в работе — пройдены все 4 шага `/funnel-build` (channel → route → touchpoints → conversions)
 - [ ] Stop+wait после каждого сегмента пройден, есть отметка в `hypotheses.md`
 - [ ] В `hypotheses.md → Log` лежит минимум 1 diff-предложение по сегменту (канал + касания)
@@ -256,7 +266,7 @@ Stop+wait — ждёт `/accept H{N}` или коррекцию.
 - [ ] Владелец сделал `/accept H{N}` хотя бы по одному предложению (или явно сказал «всё в backlog, ничего сейчас не принимаю»)
 - [ ] `funnel/channels.md` и `welcome.md` отражают принятые гипотезы
 - [ ] При активном модуле встреч — `funnel/scripts.md` тоже обновлён
-- [ ] Возражения / отказы пойманные по ходу — в `audience/voc.md` append-only
+- [ ] Возражения / отказы пойманные по ходу — в `audience/voice-of-customer.md` append-only
 - [ ] Финальное сообщение клиенту: фаза 3 закрыта + информация о фазе 4 (Brand NOT WIRED)
 
 ---
@@ -267,7 +277,7 @@ Stop+wait — ждёт `/accept H{N}` или коррекцию.
 - **Channel-First** — канал primary выбирается из dossier, не из «все так делают»
 - **Bottleneck — один** — Голдрат: главное узкое место одно, чинить его, не везде
 - **Per-segment маршрут** — у каждого сегмента свой LM, TW, последовательность касаний
-- **Возражения снизу** — из `voc.md` и реальных цитат, не из головы
+- **Возражения снизу** — из `voice-of-customer.md` и реальных цитат, не из головы
 - **Скрипты только при модуле встреч** — без активации `/marketer-enable-meetings` `scripts.md` не трогаем
 - **Закон голоса** — Алекс не перезаписывает `funnel/*.md`, только diff в Log → `/accept` владельца
 - **Stop+wait жёстко** — после каждого сегмента и на финальном bottleneck

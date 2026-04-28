@@ -36,7 +36,10 @@
     ├── agents/                 — конфиги 3 core-агентов
     │   ├── director/           — оркестратор, точка входа
     │   ├── strategist/         — партнёр 6-недельной программы
-    │   └── demiurg/            — Архитектор команды (структура офиса)
+    │   └── demiurg/            — Архитектор команды + создатель агентов (`/build`, `/audit-project`)
+    │       ├── agents/         — субагенты-сборщики (Knowledge Miner, Builder, Validator, Refiner, Researcher, Auditor, Judge, Persona Builder, Interviewer)
+    │       ├── knowledge/      — методология (architecture/, examples/, tactics/, evolving/, templates/, skill-mastery/)
+    │       └── scripts/        — validate-agent.sh, validate-office.sh, wire-check.sh, validate.sh
     ├── protocols/              — протоколы работы
     └── templates/              — шаблоны документов (client, project, knowledge)
 ```
