@@ -48,8 +48,8 @@ files:
     dest: .claude/skills/
     recursive: true
 
-# Templates копируются в папку агента — мета-скилл /unpack-project и
-# /marketer-revision используют их при первом запуске.
+# Templates копируются в папку агента — используются Алексом
+# при первом запуске для нового проекта.
 templates:
   - src: templates/customers.template.md
     dest: office/agents/alex-marketer/templates/customers.template.md

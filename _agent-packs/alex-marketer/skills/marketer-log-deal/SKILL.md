@@ -44,7 +44,7 @@ triggers:
 ## Шаг 0. Проверка контекста
 
 1. Существует ли `projects/<main>/customers.md`?
-   - Если нет → `/marketer-revision` не был запущен. Предложи сначала ревизию: *«У нас ещё нет customers.md — давай пробежимся по ревизии сначала, 20 минут, потом сразу запишем встречу?»*
+   - Если нет — создай пустой файл: `mkdir -p projects/<main> && touch projects/<main>/customers.md`
    - Если есть → продолжаем
 
 2. Существует ли папка `projects/<main>/transcripts/`?
