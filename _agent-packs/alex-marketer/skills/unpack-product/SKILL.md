@@ -7,7 +7,13 @@ mode: interactive (stop+wait checkpoints)
 
 # /unpack-product — Оркестратор фазы 2 «Продукт/Оффер»
 
-> Это **вторая фаза** пайплайна `/unpack-project`. На входе — распакованная ЦА (минимум 1 сегмент с dossier и base). На выходе — Grand Slam Offer по Хормози: Value Equation вытащена, Named Mechanism придуман, Risk Reversal зафиксирован, лестница LM → TW → Core → PM нарисована.
+📍 **Где это в системе:**
+- **Уровень:** Stage 2 entry point (после Stage 1 закрытия на `/accept` NORTH-STAR)
+- **Запускается из:** триггеров клиента («распакуй продукт», «распакуй оффер»), авто-перехода из `/unpack-project` после Phase 1
+- **Pre-flight БЛОКИРУЕТ если:** Stage 1 не закрыта — нет `/accept` на NORTH-STAR, нет `segment-portrait.md` для ТОП-сегмента, нет `voice-of-customer.md` ≥5 цитат
+- **Передаёт в:** `/product-build` (6 протоколов Хормози) → `/unpack-funnel` (Stage 3)
+
+> Это **вторая фаза** пайплайна `/unpack-project`. На входе — распакованная ЦА (минимум 1 сегмент с `segment-portrait.md` и `segment-core.md`). На выходе — Grand Slam Offer по Хормози: Value Equation вытащена, Named Mechanism придуман, Risk Reversal зафиксирован, лестница LM → TW → Core → PM нарисована.
 >
 > Ты не пишешь оффер за владельца. Ты ведёшь его через **6 диалоговых протоколов** (или lite-режим), собираешь структурированные предложения, кладёшь diff в `hypotheses.md → Log`. Финальное слово — за владельцем через `/accept H{N}`.
 
@@ -37,17 +43,50 @@ mode: interactive (stop+wait checkpoints)
 
 ---
 
-## 3. Pre-flight checks
+## 3. Pre-flight checks (БЛОКИРУЮЩИЕ — Stage 1 → Stage 2 gate)
 
-Перед стартом проверь:
+⚠️ **Stage Lock — техническая стена.** `/unpack-product` = переход из Stage 1 (Audience) в Stage 2 (Product). Этот переход **необратим без явного `/accept`** на NORTH-STAR от владельца. Если переход начат до закрытия Stage 1 — продукт строится на недораспакованной ЦА, оффер слабый, починка дороже.
+
+### 3.1 Stage 1 closure gate (блокирующий, до любого ответа клиенту)
+
+```bash
+# 1. Существует NORTH-STAR.md?
+[ -f "projects/<main>-audience/audience/segments/NORTH-STAR.md" ]
+
+# 2. NORTH-STAR не пустой?
+[ -s "projects/<main>-audience/audience/segments/NORTH-STAR.md" ]
+
+# 3. Есть /accept маркер в NORTH-STAR.md?
+grep -E "/accept|✅ accepted|status: accepted" projects/<main>-audience/audience/segments/NORTH-STAR.md
+
+# 4. Минимум 1 сегмент с заполненным dossier?
+ls projects/<main>-audience/audience/segments/*/segment-portrait.md 2>/dev/null
+
+# 5. voice-of-customer.md (или voice-of-customer.md если ещё не переименован) с ≥ 5 цитатами?
+wc -l projects/<main>-audience/audience/voice-of-customer.md
+```
+
+**Решение по результату:**
+
+| Условие | Действие |
+|---------|----------|
+| NORTH-STAR не существует | **STOP.** *«ЦА ещё не распакована. Без неё оффер строить наугад. Запускаю `/audience-stage` сначала?»* → `/audience-stage` |
+| NORTH-STAR существует, но пустой / нет dossier | **STOP.** *«ЦА в процессе. Stage 1 не закрыта. Возвращаюсь в `/audience-resume` где остановились.»* → `/audience-resume` |
+| dossier есть, но нет `/accept` маркера | **STOP.** *«ТОП-3 сегментов собраны, но не подтверждены тобой. Без `/accept` Stage 1 открыта. Покажу ТОП-3 — скажешь `/accept` или поправки.»* Покажи NORTH-STAR. Жди явного `/accept`. |
+| voice-of-customer пуст / < 5 цитат | **WARN, не STOP.** *«VoC слабоват — Likelihood и Dream придётся вытаскивать диалогом, не из голоса ЦА. Качество оффера будет ниже. Идём так или сначала добираем VoC?»* |
+| Все условия ✅ | Continue к Шагу 3.2 |
+
+**Update agent-state.md:** при любом срабатывании gate — `last_preflight_check: <date> blocked|warned|passed`.
+
+### 3.2 Контекст для распаковки (после прохождения gate)
 
 | Что | Где смотрим | Если нет |
 |---|---|---|
-| Минимум 1 сегмент с dossier | `audience/segments/{slug}/dossier.md` | Стоп. Скажи: *«Сначала ЦА — без неё оффер строить не из чего. Запускаю `/segments-discover`?»* |
-| `audience/voc.md` | Есть VoC цитаты | Если пусто — предупреди что Likelihood и Dream придётся вытаскивать диалогом, а не из голоса ЦА |
+| Активный сегмент (один из ТОП-3) | `audience/segments/NORTH-STAR.md` | Если несколько — спроси какой первым (обычно hot) |
+| `audience/voice-of-customer.md` | VoC цитаты | См. WARN выше |
 | `brand/expert-bank.md` | Голос владельца | Если пусто — ок, будем собирать через диалог |
 | `brand/positioning.md` | Unique Mechanism | Если есть — учитывай, не переизобретай |
-| `product/_protocols/` | 6 файлов от project-template | Если нет — спроси про project-template, lite-режим (см. ниже) |
+| `product/_protocols/` | 6 файлов от project-template | Если нет — lite-режим (см. ниже) |
 
 **Если несколько сегментов:** спроси владельца:
 
@@ -66,9 +105,9 @@ mode: interactive (stop+wait checkpoints)
 Без вопросов клиенту, тихо:
 
 1. `audience/segments/NORTH-STAR.md` — определи активный сегмент (если несколько — спроси, см. выше)
-2. `audience/segments/{slug}/dossier.md` — БПСВ + 7 блоков интервью + awareness
-3. `audience/segments/{slug}/base.md` — сжатая база сегмента
-4. `audience/voc.md` — голос ЦА с цитатами
+2. `audience/segments/{slug}/segment-portrait.md` — БПСВ + 7 блоков интервью + awareness
+3. `audience/segments/{slug}/segment-core.md` — сжатая база сегмента
+4. `audience/voice-of-customer.md` — голос ЦА с цитатами
 5. `brand/expert-bank.md` — голос владельца
 6. `brand/positioning.md` — Unique Mechanism (если есть)
 7. `customers/INDEX.md` — если активен модуль встреч, средняя actuality оффера
@@ -94,8 +133,8 @@ ls product/_protocols/
 to: /product-build
 context:
   - active_segment: {slug}
-  - dossier_path: audience/segments/{slug}/dossier.md
-  - voc_path: audience/voc.md
+  - dossier_path: audience/segments/{slug}/segment-portrait.md
+  - voc_path: audience/voice-of-customer.md
   - expert_bank: brand/expert-bank.md
   - positioning: brand/positioning.md (если есть)
   - customers_actuality: {среднее значение из customers/} (если модуль активен)

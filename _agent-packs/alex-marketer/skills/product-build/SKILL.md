@@ -58,7 +58,7 @@ mode: interactive (stop+wait после каждого протокола)
 **Чек готовности (перед stop+wait):**
 - ✅ Дельта зафиксирована (откуда → куда, цифрой/конкретикой)
 - ✅ Аватар имеет имя + демографию + психографию + день из жизни
-- ✅ Минимум 3 цитаты под Дельту из voc.md или customers/
+- ✅ Минимум 3 цитаты под Дельту из voice-of-customer.md или customers/
 
 **Что записывает:**
 - Diff в `hypotheses.md → Log` для секций «Дельта», «Аватар» в `core-offer.md`
@@ -81,7 +81,7 @@ mode: interactive (stop+wait после каждого протокола)
 4. Желаемое состояние через год
 
 **Что записывает:**
-- Дополнения в `audience/voc.md` (новые цитаты)
+- Дополнения в `audience/voice-of-customer.md` (новые цитаты)
 - Diff в Log для разделов Dream Outcome / Pains в `core-offer.md`
 
 **Stop+wait:** *«В1 закрыт. По болям и желанию вижу [саммари]. Согласен? Дальше В2 — возражения, конкуренты, готовность платить.»*
@@ -254,11 +254,11 @@ mode: interactive (stop+wait после каждого протокола)
 | `product/core-offer.md` | Все секции (Дельта, Аватар, VE, NM, Stack, цена, RR, Bridges) | Diff в `hypotheses.md → Log` → `/accept H{N}` от владельца |
 | `product/ladder.md` | Как Core встаёт в LM→TW→Core→PM | Diff в Log → `/accept` |
 | `product/proof.md` | Кейсы под этот оффер (опционально) | Append владелец |
-| `audience/voc.md` | Новые цитаты из протоколов 1-3 | Append (Алекс пишет) |
+| `audience/voice-of-customer.md` | Новые цитаты из протоколов 1-3 | Append (Алекс пишет) |
 | `brand/competitors.md` | Дополнения из протокола 3 | Append |
 | `hypotheses.md` | Гипотезы [PRODUCT] [OFFER] [PRICE] [POSITIONING] в Active + Log | Алекс |
 
-**Закон голоса:** `core-offer.md`, `ladder.md`, `proof.md` — пишет владелец через `/accept`. Алекс предлагает diff. `voc.md` и `competitors.md` — append-зоны Алекса.
+**Закон голоса:** `core-offer.md`, `ladder.md`, `proof.md` — пишет владелец через `/accept`. Алекс предлагает diff. `voice-of-customer.md` и `competitors.md` — append-зоны Алекса.
 
 ---
 
