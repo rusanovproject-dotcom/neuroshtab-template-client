@@ -308,7 +308,7 @@
 
 ## 6. JTBD-исследование для поиска продукта
 
-Источник: https://zamesin.ru/books/product-howto/how-to-find-product-requirements-using-jtbd-research/
+Источник: https://zamesin.ru/books/product-howto/how-to-find-product-requirements-using-jtbd/
 
 После выбора сегмента — понять каким конкретно делать продукт. Изучаем Small/Micro Jobs.
 
@@ -322,7 +322,7 @@
 
 ## 7. JTBD-исследование для поиска коммуникации и продаж
 
-Источник: https://zamesin.ru/books/product-howto/understand-how-to-sell-a-product-with-jtbd-research/
+Источник: https://zamesin.ru/books/product-howto/understand-how-to-sell-a-product-with-jtbd/
 
 Цель: узнать путь клиента к покупке. Для маркетинга, продаж, growth.
 
