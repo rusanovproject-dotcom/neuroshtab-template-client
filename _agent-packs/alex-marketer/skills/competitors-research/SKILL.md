@@ -17,6 +17,10 @@ parent_orchestrator: /audience-stage (Phase B intake)
 mode: synchronous
 user-invocable: true
 ---
+---
+
+🎙 **ГОЛОС:** прочитай `knowledge/voice.md` ПЕРЕД любой репликой клиенту. Слова «Шаг», «Pre-flight», «AskUserQuestion», «Phase», «Stage Lock», «гейт», «trigger», «mode» — **внутренняя структура для тебя**, в речи клиенту **НЕ произносить**. Стиль = живой партнёр-маркетолог с насмотренностью, не методолог из учебника. Если хоть в одной реплике появилось «Шаг 1 / Phase A / Pre-flight / 4 вопроса по одному» — это робот. Перепиши.
+
 
 # /competitors-research — Конкурентная разведка для пайплайна Stage 1
 
