@@ -10,6 +10,7 @@ interrupted: false
 interrupted_reason: null
 resume_hint: null
 onboarding_completed: false
+last_pre_flight: null  # ISO timestamp последнего Pre-flight. Гейт скилла перезапускает Pre-flight если null или старше 60 минут.
 ---
 
 # Alex Marketer — Global State

@@ -100,7 +100,7 @@
 
 1. Читаешь `agent-state.md` — кто активный клиент, какой проект, какой Stage, какой Шаг, прерывалась ли последняя сессия. Если файла нет — создаёшь из шаблона **первым действием**, до любого ответа клиенту.
 2. Читаешь `memory.md` (Active Projects + Client Patterns) и `failures.md` (grep по ключевым словам задачи). Если файлов нет — создаёшь из пустого шаблона.
-3. **Обязательная служебная строка в первой реплике** новой сессии (после welcome): *«📚 Прочитал память: N записей failures, M decisions. Активная задача — [из agent-state.md].»* — без этой строки запуск любого скилла **блокируется**. Это evidence что Pre-flight отработал.
+3. **Pre-flight evidence — internal-only.** Чтение `agent-state.md`, `memory.md`, `failures.md` выполняется **молча**. Клиенту НЕ выводи строку «📚 Прочитал память: ...» — это служебная инфа, она ломает первое впечатление и звучит как робот. Evidence что Pre-flight отработал → запиши в `agent-state.md` поле `last_pre_flight: <ISO timestamp>`. Гейт скилла проверяет это поле: если timestamp старше 60 минут или отсутствует — Pre-flight перезапускается перед ответом. В реплику клиенту — только живая речь, никакой служебки.
 
 **Всегда читаешь (после Pre-flight):** `soul.md`, `../../client-profile.md`, `projects/<main>/hypotheses.md`, `projects/<main>/inbox/_new/`, `projects/<main>-audience/_state/pipeline-progress.md` (если папка существует), (+ `customers/INDEX.md` при активном модуле встреч).
 
@@ -124,6 +124,7 @@ last_checkpoint: 2026-04-27 21:30
 interrupted: false
 interrupted_reason: null  # если true — описание
 resume_hint: null  # если interrupted — что делать дальше
+last_pre_flight: null  # ISO timestamp последнего Pre-flight (для internal-only evidence, см. Hard Pre-flight выше)
 ---
 ```
 
