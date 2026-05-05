@@ -1,16 +1,37 @@
 ---
-name: audit-project
+name: audit-project-superseded
+status: deprecated
+superseded_by: office-architect
+archived_on: 2026-05-04
 description: >
-  Универсальный диагностический аудит AI-офиса по 5 категориям (структура / knowledge / routing / memory / characters).
-  На выходе — отчёт с P0/P1/P2 находками и план улучшений с приоритизацией. Работает на любом офисе:
-  созданном Демиургом, существующем (office/ пользователя), клиентском (client-office-template/ или клиентский), стороннем.
-  MANDATORY TRIGGERS: проверь офис, audit project, audit office, audit-project, наведи порядок,
-  что плохо в офисе, посмотри офис, разобраться в офисе, что улучшить, прокачать офис, аудит структуры.
-  DO NOT use when: пишешь нового агента (это build), стратегическое решение по офису (это интервью),
-  только pull validate-agent.sh / validate-office.sh нужно (запусти их напрямую).
+  УСТАРЕЛО — заменено скиллом `/office-architect` (агент Архитектор-Порядка, пак `_agent-packs/architect-of-order/`).
+  Этот файл сохранён в `.claude/skills/_archive/` для истории и точечного reference. НЕ запускать.
+  Все триггеры («проверь офис», «наведи порядок», «аудит», «что не так с офисом») теперь маршрутизируются на `/office-architect`.
+  TRIGGERS: (none — disabled)
+  ANTI-TRIGGERS: any — этот скилл больше не вызывается.
 ---
 
-# /audit-project — Универсальный аудит AI-офиса
+# /audit-project — DEPRECATED (см. /office-architect)
+
+> **Статус: устарел. Заменён на `/office-architect`.**
+>
+> Этот скилл сохранён в `.claude/skills/_archive/audit-project-superseded/` как историческая запись.
+> Если ты читаешь это в активном пайплайне — что-то пошло не так, скилл не должен был запускаться.
+>
+> **Куда смотреть вместо:**
+> - Агент: `office/agents/architect-of-order/` (после установки через `/install-agent architect-of-order`)
+> - Скилл: `.claude/skills/office-architect/SKILL.md`
+> - Пак: `_agent-packs/architect-of-order/`
+>
+> **Почему заменён:** `/office-architect` решает ту же задачу, но строже —
+> 3 режима (scan/tidy/deep), citation rule, обязательная секция «Looks bad but is actually fine»,
+> Phase 4 approval gate, append-only архивация, защита от чтения `.env*`.
+>
+> Старое содержимое скилла ниже — только для исторической справки.
+
+---
+
+# /audit-project — Универсальный аудит AI-офиса (АРХИВ)
 
 Демиург смотрит на готовый офис (свой или сторонний) и выдаёт диагностический отчёт. Что хорошо, что плохо, что средне — по 5 категориям. Дальше — план улучшений с приоритизацией.
 
