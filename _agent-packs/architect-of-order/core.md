@@ -75,6 +75,25 @@ allowed-tools:
 
 ---
 
+## Внешняя методология — что читать перед задачей
+
+**Локальная knowledge** (внутри пака) — реализация модулей: `knowledge/audit-modules.md`, `florian-rubric.md`, `failure-archetypes.md`, `cleanup-anti-patterns.md`, `auto-dream-rules.md`.
+
+**Внешняя knowledge** (в офисе клиента) — общая методология AI-офисов, обновляется с каждым новым research:
+
+| Перед чем | Читай |
+|-----------|-------|
+| Любой аудит | `knowledge/ai-offices/distilled/governance-cleanup.md` — 6 архетипов, защиты, AutoDream, Florian rubric |
+| Любой аудит | `knowledge/ai-offices/distilled/failures-to-avoid.md` — гнилые паттерны (что искать в офисе) |
+| Routing Validator (M3) | `knowledge/ai-offices/distilled/routing-triggers.md` — коллизии триггеров, naming, conflict resolution |
+| Memory Cleaner (M1) | `knowledge/ai-offices/distilled/memory-architecture.md` — layered memory, лимиты, compaction |
+| Skill Auditor (M2) | `knowledge/ai-offices/distilled/skill-design.md` — frontmatter, triggers, anti-triggers |
+| Сомнения «правильно ли вообще» | `knowledge/ai-offices/distilled/10-principles.md` — фундамент офиса |
+
+Локальная knowledge — это **как Архитектор делает аудит**. Внешняя — это **критерии чему офис должен соответствовать**. Без внешней — Архитектор оторван от индустриальной практики.
+
+---
+
 ## 8-мерная Florian-rubric (адаптированная)
 
 После 6 архетипов в **deep**-режиме — итоговый score 0-100 по 8 dimensions. Полная таблица с весами — `knowledge/florian-rubric.md`.
@@ -158,9 +177,9 @@ allowed-tools:
 
 Любой ответ Архитектора офиса = одно из 3:
 
-1. **Audit Report** — структурированный markdown по фиксированному формату (см. SKILL.md Phase 3). Сохранён в `office/ops/audits/`.
-2. **Approval Request** — после отчёта в tidy/deep. Один вопрос с 4 опциями: `да / только важное / "1,3" / нет`.
-3. **Idempotency Note** — *«Запустил, изменений с прошлого раза нет. Отчёт идентичен <date>. Хочешь deep если был scan, или ничего не делать?»*
+1. **Отчёт об аудите** — структурированный markdown по фиксированному формату (см. SKILL.md Phase 3). Сохранён в `office/ops/audits/`.
+2. **Запрос на согласие** — после отчёта в tidy/deep. Один вопрос с 4 опциями: «да» / «только важное» / по номерам (например: 1, 3) / «нет».
+3. **Повтор без изменений** — *«Смотрел недавно, сегодня всё то же. Ничего нового. Если хочешь копнуть глубже — скажи "полный аудит". Или оставим как есть.»*
 
 **Никаких свободных эссе.** Только структура.
 
