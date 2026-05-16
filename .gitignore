@@ -3,3 +3,7 @@
 node_modules/
 .claude/agent-memory*
 .mcp.json
+
+# Installed agent-packs that live in their own upstream repos
+# (managed via /install-agent, not committed here)
+_agent-packs/copywriter/

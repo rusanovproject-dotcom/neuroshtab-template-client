@@ -1,11 +1,11 @@
 ---
-name: architect-of-order-memory
-agent: architect-of-order
+name: office-cleaner-memory
+agent: office-cleaner
 version: 1.0.0
 status: active
 ---
 
-# Архитектор-Порядка — Memory
+# Рита — Memory
 
 Append-only. Пишу сам после каждого аудита. Старые записи не трогаю.
 
