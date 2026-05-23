@@ -1,0 +1,37 @@
+# Личные данные инстанса — НЕ коммитить в публичный репозиторий.
+# В git живут только шаблоны (*.template.*, TEMPLATE.md) — это и есть пак.
+
+# Реальные дневниковые записи по дням
+tracking/daily/20*/
+tracking/daily/*/
+
+# Метрики инстанса — рабочий файл создаётся из metrics.template.jsonl при онбординге.
+# В git живёт только шаблон (tracking/metrics.template.jsonl), рабочие — НЕ коммитим.
+tracking/metrics-20*.jsonl
+
+# Свёрнутое сырьё и архив
+_archive/*
+!_archive/.gitkeep
+
+# Реальные недельные/месячные отчёты (TEMPLATE остаётся)
+weekly/20*.md
+monthly/20*.md
+
+# Рабочие файлы инстанса — создаются из *.template при онбординге (scripts/bootstrap.sh),
+# заполняются личными данными ученика, git их НЕ видит. В репо живёт только *.template.
+core/profile.md
+core/drives.md
+core/history.md
+core/people.md
+core/what-works.md
+goals.md
+state.md
+
+# Внутренние процессные доки (планы/ревью с owner-контекстом) — НЕ часть публичного пака, держим локально
+docs/plans/
+docs/review/
+docs/REVIEW-PLAN.md
+
+# Системное
+.DS_Store
+*.log
