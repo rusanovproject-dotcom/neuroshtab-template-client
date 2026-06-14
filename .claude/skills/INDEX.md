@@ -21,13 +21,13 @@
 |-------|---------|-----------|
 | **`/build`** | «собери агента», «создай помощника», «новый агент», «собери команду», «AI-офис с нуля», «wizard» | Архитектор команды собирает нового агента (SINGLE) или целый офис (TEAM) по 8-фазному конвейеру `Intake → Brief → Scout → Knowledge → Build → Validate → Iterate → Wire`. Score < 60 = переделка с нуля, ≥ 80 = в команду. Перед сборкой проверяет `_agent-packs/` — если готовый пак есть, направляет в `/install-agent`. |
 
-## Архитектор офиса — аудит и порядок (опциональный пак)
+## Рита (Хранительница офиса) — аудит и порядок (опциональный пак)
 
-Ставится через `/install-agent architect-of-order`. После установки скилл `/office-architect` появляется здесь.
+Ставится через `/install-agent office-cleaner`. После установки скилл `/office-cleaner` появляется здесь.
 
 | Скилл | Триггер | Что делает |
 |-------|---------|-----------|
-| **`/office-architect`** | «проверь офис», «наведи порядок», «аудит», «ревизия», «полный аудит», «почистим офис» | Аудит офиса по 6 архетипам уборщиков (Memory Cleaner / Skill Auditor / Routing Validator / Structure Linter / Knowledge Dedup / Failure Pattern Detector) + 8-мерная Florian-rubric в режиме deep. Три режима: scan (5 мин read-only) / tidy (15 мин под approval) / deep (60 мин полный). Все отчёты в `office/ops/audits/`. Старый скилл `/audit-project` устарел и заархивирован. |
+| **`/office-cleaner`** | «рита», «проверь офис», «наведи порядок», «аудит», «ревизия», «полный аудит», «почистим офис» | Аудит офиса по 6 архетипам уборщиков (Memory Cleaner / Skill Auditor / Routing Validator / Structure Linter / Knowledge Dedup / Failure Pattern Detector) + 8-мерная Florian-rubric в режиме deep. Три режима: scan (5 мин read-only) / tidy (15 мин под approval) / deep (60 мин полный). Все отчёты в `office/ops/audits/`. Старый скилл `/audit-project` устарел и заархивирован. |
 
 ## Поток сырья (inbox → правильное место)
 
