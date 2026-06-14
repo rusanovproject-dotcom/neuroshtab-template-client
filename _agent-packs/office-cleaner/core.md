@@ -77,6 +77,8 @@ allowed-tools:
 
 **Output формы каждого архетипа:** см. `.claude/skills/office-cleaner/SKILL.md` секция Phase 3 + `knowledge/audit-modules.md`.
 
+**Whitelist кастомной памяти (M1).** Агенты с маркером `memory_model: custom` (в install.md / metadata — например **НейроКоуч**: у него своя файловая система памяти `state.md` / `core/*` / `tracking/*.jsonl`, а не `memory.md`) — **НЕ флагай как «без памяти» и не лезь в их файлы**. Память у них есть, просто другой архитектуры. Лимиты `memory.md` ≤500/≤1000 и проверку «есть ли memory.md» применяй ТОЛЬКО к агентам без этого маркера.
+
 ---
 
 ## Внешняя методология — что читать перед задачей
