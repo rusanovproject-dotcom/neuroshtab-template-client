@@ -42,9 +42,9 @@ customers/
 
 | Фраза владельца | Скилл | Что делает |
 |----------------|-------|------------|
-| «провёл диагностику с {имя}» | `/marketer-log-deal` | Создаёт/обновляет `{name}/{date}-diag.md` (5 полей) + voc + expert-bank |
-| «{имя} оплатил» | `/marketer-log-deal` | Создаёт `{name}/{date}-deal.md` (8 полей) + обновляет _summary |
-| «{имя} отказался» | `/marketer-log-deal` | `refusals/{name}-{date}.md` + анализ причины |
+| «провёл диагностику с {имя}» | `/jtbd-log-deal` | Создаёт/обновляет `{name}/{date}-diag.md` (5 полей) + voc + expert-bank |
+| «{имя} оплатил» | `/jtbd-log-deal` | Создаёт `{name}/{date}-deal.md` (8 полей) + обновляет _summary |
+| «{имя} отказался» | `/jtbd-log-deal` | `refusals/{name}-{date}.md` + анализ причины |
 | «вот транскрипт» | `/parse-meeting` | Парсит транскрипт в 7 артефактов параллельно |
 
 ## 8 полей карточки сделки

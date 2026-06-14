@@ -49,7 +49,7 @@ files:
   - src: knowledge/
     dest: office/agents/designer/knowledge/
   - src: skills/
-    dest: office/agents/designer/skills/
+    dest: .claude/skills/
   - src: templates/
     dest: office/agents/designer/templates/
 ```

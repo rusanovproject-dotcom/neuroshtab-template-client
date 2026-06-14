@@ -60,10 +60,8 @@ files:
     dest: office/agents/demiurg/scripts/
     recursive: true
 
-  # Скиллы — копируются в .claude/skills/ для прямого вызова через слэш-команды
-  - src: skills/build/
-    dest: .claude/skills/build/
-    recursive: true
+# Скилл /build НЕ переустанавливается из пака — он базовый, уже живёт
+# в `.claude/skills/build/` офиса. Дублировать его в паке = коллизия (H-19).
 ```
 
 ---
@@ -76,7 +74,6 @@ folders:
   - office/agents/demiurg/knowledge/
   - office/agents/demiurg/agents/
   - office/agents/demiurg/scripts/
-  - .claude/skills/build/
 
 # Папка для внешних research-досье, которые читает Knowledge Miner
   - knowledge/scout/
