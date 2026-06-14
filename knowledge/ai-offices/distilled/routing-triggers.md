@@ -221,7 +221,7 @@ Hamel Husain (`research/02-forums-communities.md:340`):
 
 ## Граф передачи задач
 
-Никита
+Пользователь
   └── Director (все задачи кроме личных)
         ├── Алекс ─→ Producer / Copywriter / Designer / Hermes
         ├── Strategist ─→ /strategist-pipeline

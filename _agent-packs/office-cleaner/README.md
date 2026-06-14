@@ -25,7 +25,7 @@
 В терминале (внутри своего AI-офиса):
 
 ```bash
-git clone https://github.com/rusanovproject-dotcom/office-cleaner-pack.git _agent-packs/office-cleaner
+git clone https://github.com/<your-org>/office-cleaner-pack.git _agent-packs/office-cleaner
 ```
 
 В Claude Code:

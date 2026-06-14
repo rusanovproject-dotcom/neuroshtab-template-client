@@ -73,12 +73,12 @@ else
   blocker "A1: Root CLAUDE.md is MISSING"
 fi
 
-# A2: AGENTS.md exists (BLOCKER for small+)
-if [ -f "$TARGET/AGENTS.md" ]; then
+# A2: AGENTS.md exists (BLOCKER for small+) — поддержка office/ layout клиентского шаблона
+if [ -f "$TARGET/AGENTS.md" ] || [ -f "$TARGET/office/AGENTS.md" ]; then
   pass "A2: AGENTS.md exists"
 else
   # Check if there are agents/ dir — if yes, it's small+ and AGENTS.md is required
-  if [ -d "$TARGET/agents" ] || [ -d "$TARGET/.claude/agents" ]; then
+  if [ -d "$TARGET/agents" ] || [ -d "$TARGET/.claude/agents" ] || [ -d "$TARGET/office/agents" ]; then
     blocker "A2: AGENTS.md is MISSING (agents/ directory exists — small+ pattern requires it)"
   else
     pass "A2: AGENTS.md not needed (solo pattern)"
@@ -137,9 +137,12 @@ echo ""
 echo -e "${CYAN}[B. Agents]${NC}"
 
 # Parse AGENTS.md to find agent file references
-AGENTS_FILE="$TARGET/AGENTS.md"
+AGENTS_FILE=""
+for candidate in "$TARGET/AGENTS.md" "$TARGET/office/AGENTS.md"; do
+  [ -f "$candidate" ] && AGENTS_FILE="$candidate" && break
+done
 AGENTS_DIR=""
-for candidate in "$TARGET/agents" "$TARGET/.claude/agents"; do
+for candidate in "$TARGET/agents" "$TARGET/.claude/agents" "$TARGET/office/agents"; do
   [ -d "$candidate" ] && AGENTS_DIR="$candidate" && break
 done
 
@@ -346,7 +349,7 @@ while IFS= read -r mdfile; do
     done < <(echo "$line" | grep -oE '\]\([^)]+\)' 2>/dev/null | sed 's/\](//;s/)$//' | grep -E '\.(md|sh|yml|yaml|json)$')
 
   done < "$mdfile"
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 $c2_ok && pass "C2: All file references valid ($c2_checked checked)"
 
 # C3: No duplicate content blocks (>5 identical consecutive lines across files) (WARNING)
@@ -367,7 +370,7 @@ while IFS= read -r mdfile; do
       ((i += 5))
     done
   fi
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 
 if [ -f "$dup_tmp" ] && [ -s "$dup_tmp" ]; then
   while IFS= read -r hash; do
@@ -420,7 +423,7 @@ while IFS= read -r mdfile; do
     target_clean=$(echo "$target" | sed 's/`//g; s/\.md//g' | xargs)
     [ -n "$target_clean" ] && echo "$from -> $target_clean" >> "$graph_tmp"
   done < <(grep -iE '(передай|forward|delegate|→|эскалируй)' "$mdfile" 2>/dev/null | grep -oE '`[^`]+\.md`' | sed 's/`//g' | sed 's/\.md//')
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 
 if [ -f "$graph_tmp" ] && [ -s "$graph_tmp" ]; then
   # Simple cycle detection: for each node, follow edges up to depth 10
@@ -491,7 +494,7 @@ while IFS= read -r mdfile; do
     warn "D3: $rel has $todo_count TODO/FIXME stubs"
     d3_ok=false
   fi
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 $d3_ok && pass "D3: No TODO stubs found"
 
 # D4: All md files <= 300 lines (WARNING, excluding walkthrough/guide files)
@@ -508,7 +511,7 @@ while IFS= read -r mdfile; do
     warn "D4: $rel is $lines lines (limit: 300)"
     d4_ok=false
   fi
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 $d4_ok && pass "D4: All md files <= 300 lines"
 
 # D5: ops/ directory exists (WARNING)

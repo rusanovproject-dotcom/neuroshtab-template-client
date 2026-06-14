@@ -1,13 +1,13 @@
 # Team workflow — client-office-template
 
-Команда: Никита (@rusanovproject-dotcom) + напарник (@skarbitra-debug).
+Команда: владелец офиса + команда.
 
 ## Быстрый старт для напарника
 
 ```bash
 # 1. Клонировать
-git clone https://github.com/rusanovproject-dotcom/client-office-template.git
-cd client-office-template
+git clone https://github.com/<your-org>/<your-template-repo>.git
+cd <your-template-repo>
 
 # 2. Установить pre-commit (один раз, опционально)
 pip install pre-commit

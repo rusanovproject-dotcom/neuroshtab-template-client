@@ -477,7 +477,7 @@ M6 Failure Detector =
 - `research/2026-05-04-office-architecture/07-audit-client-template.md:381-427` — P0/P1/P2 проблем шаблона
 - `research/2026-05-04-office-architecture/08-reviewer-report.md:32-260` — что Демиург пропустил (4 P0 + 7 P1)
 - `research/2026-05-04-office-architecture/04-governance-cleanup-agents.md:329-391` — anti-patterns destructive cleanup
-- `research/2026-05-04-office-architecture/FINAL-REPORT.md:140-160` — что Никите проверить руками
+- `research/2026-05-04-office-architecture/FINAL-REPORT.md:140-160` — что владельцу проверить руками
 
 ## Связанные дистилляты
 

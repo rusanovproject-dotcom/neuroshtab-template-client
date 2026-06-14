@@ -99,7 +99,7 @@ Anthropic рекомендует 3-5 MCP одновременно подключ
 | **PostToolUse** | После tool успеха | Логирование в БД/Helicone, диффы git, форматирование, snapshot после Edit/Write | `disler/.claude/hooks/post_tool_use.py` |
 | **PostToolUseFailure** | После tool провала | Структурированный error log | `disler/.claude/hooks/post_tool_use_failure.py` |
 | **PreCompact** | Перед компакт-сессией | Бэкап транскрипта, сохранить state, handoff | `disler/.claude/hooks/pre_compact.py` |
-| **Notification** | Когда Claude хочет уведомить | Push в Telegram через openclaw, TTS-озвучка | `disler/.claude/hooks/notification.py` |
+| **Notification** | Когда Claude хочет уведомить | Push в Telegram через бот-планировщик, TTS-озвучка | `disler/.claude/hooks/notification.py` |
 | **Stop** | Когда Claude закончил отвечать; **exit code 2 force-continuation** | Wrap-up, nudge от коуча, проверка прогресса | `disler/.claude/hooks/stop.py` |
 | **SubagentStart** | Спавн субагента | Лог спавна | `disler/.claude/hooks/subagent_start.py` |
 | **SubagentStop** | Субагент закончил; **exit code 2 блокирует завершение** | Верификация completion, логирование результата | `disler/.claude/hooks/subagent_stop.py` |

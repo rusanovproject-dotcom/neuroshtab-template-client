@@ -38,7 +38,7 @@ mode: interactive (stop+wait на шаге 5)
 - При **4-15 активных** — per-segment ротация раз в 2 недели (один сегмент за пятницу).
 - При **15+** — see `OPERATIONS.md` (per-segment SOURCES, ротация).
 
-Триггер cron — отдельный watcher OpenClaw (`audience/watcher`) шлёт маркетологу напоминание в TG в пятницу 16:00 со списком сегментов готовых к ревизии и команду `/revise-segment {slug}`.
+Триггер cron — отдельный watcher / планировщик (cron) (`audience/watcher`) шлёт маркетологу напоминание в TG в пятницу 16:00 со списком сегментов готовых к ревизии и команду `/revise-segment {slug}`.
 
 **Вручную** — `/revise-segment {slug}` или `/revise-segment --all` (глобальная ревизия всех активных).
 
@@ -323,7 +323,7 @@ Diff включает три типа правок:
 | **Скилл №2 `/segments-unpack`** | Поставляет stream с тегами и источники в SOURCES.md — без него ревизовать нечего |
 | **Скилл №1 `/segments-discover`** | Поставляет MAP.md с убитыми гипотезами — утилита проверяет их на возрождение |
 | **`/derive-northstar`** (Backlog) | Будет вызываться опционально после `--update-northstar` |
-| **OpenClaw watcher** `audience/watcher` | Шлёт TG-напоминание в пятницу 16:00 с командой `/revise-segment` |
+| **Watcher / планировщик (cron)** `audience/watcher` | Шлёт TG-напоминание в пятницу 16:00 с командой `/revise-segment` |
 
 **Принцип:** утилита **не делает** того что делают скиллы №0-№3. Она только **ревизует** то что они уже распаковали. Если нужна полная распаковка нового сегмента — это `/segments-discover` → `/segments-unpack` → `/segments-awareness`, не сюда.
 

@@ -71,7 +71,7 @@ Python 3 обычно есть везде где Claude Code. Это более 
 Через Bash проверь:
 1. Текущая папка — git-репозиторий: `test -d .git && echo OK`
 2. Есть remote на github: `git remote -v | grep github`
-3. Remote указывает на `neuroshtab-template-client` ИЛИ есть `upstream`
+3. Remote указывает на апстрим-шаблон (origin / upstream)
 4. Есть интернет: `git ls-remote origin HEAD` (если падает — нет сети)
 5. Есть права на `/tmp/` для backup: `touch /tmp/.office-backup-test && rm /tmp/.office-backup-test`
 6. Запуск из **корня офиса** (не подпапки): `test -f CLAUDE.md -a -d office -a -d .claude`
@@ -91,9 +91,9 @@ Python 3 обычно есть везде где Claude Code. Это более 
 
 Через Bash:
 - `git remote -v` — смотрим remotes
-- Если есть `origin https://github.com/rusanovproject-dotcom/neuroshtab-template-client...` — используем **origin**
-- Иначе если есть `upstream https://github.com/rusanovproject-dotcom/neuroshtab-template-client...` — используем **upstream**
-- Иначе — добавить: `git remote add upstream https://github.com/rusanovproject-dotcom/neuroshtab-template-client.git`, использовать **upstream**
+- Если есть `origin <TEMPLATE_REPO_URL>` — используем **origin** (URL апстрим-шаблона — у владельца офиса / в .env.example)
+- Иначе если есть `upstream <TEMPLATE_REPO_URL>` — используем **upstream**
+- Иначе — **спроси владельца офиса** URL апстрим-шаблона (откуда тянуть обновления) и только ПОСЛЕ явного ответа добавь remote: `git remote add upstream <URL>`. НЕ добавляй remote молча/наугад — это внешнее действие.
 
 Запомни переменную `$REMOTE` для следующих шагов.
 
@@ -254,7 +254,7 @@ git reset --hard $REMOTE/main
   - `inbox/prework.md` — если был, есть
   - `office/agents/*/memory.md` и `failures.md` — размер как в backup (или больше)
 - [ ] Размеры пользовательских файлов НЕ меньше чем в backup (если меньше — что-то обрезалось, откат)
-- [ ] Запретные слова в новых файлах: `grep -rniE "никит|русан|life-os|openclaw"` по всему офису — должно быть 0
+- [ ] Запретные слова в новых файлах: `grep -rniE "никит|русан|life-os|openclaw" --exclude-dir=ai-offices --exclude-dir=_archive` по всему офису — должно быть 0 (методичка `knowledge/ai-offices/` и `_archive/` исключены — референсные/исторические материалы)
 
 **Если любой чек провалился:**
 - Atomic rollback: восстанови всё из backup поверх, перейди на commit который был ДО update (из `commit_hash.txt`)

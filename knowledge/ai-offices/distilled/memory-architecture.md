@@ -23,7 +23,7 @@ status: live
 Уровень 2 — Эпизодическая память Claude
             .claude/MEMORY.md — индекс ≤200 строк (Anthropic auto-load лимит)
             .claude/memory/<topic>.md — топик-файлы lazy-loading
-            Аналог memory у Никиты в ~/.claude/projects/.../memory/
+            Аналог memory пользователя в ~/.claude/projects/.../memory/
 
 Уровень 3 — Layered agent memory (5 файлов на агента)
             office/agents/<name>/

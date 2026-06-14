@@ -127,7 +127,7 @@ description: Фаза 1 распаковки пользователя Страт
 
 ## Шаг 7. Создать черновики проекта (сам, через Write/Edit/Bash)
 
-Создай каталог `projects/<PROJECT_NAME>/` и подпапки: `audience/`, `products/`, `brand/`, `knowledge/`.
+Создай каталог `projects/<PROJECT_NAME>/` и подпапки: `audience/`, `products/`, `brand/`, `knowledge/`, `financial/`.
 
 Положи туда 6 черновых файлов, заполненных на 20-50% на основе того что собрал:
 
