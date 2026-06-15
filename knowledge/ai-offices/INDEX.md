@@ -53,5 +53,5 @@ ai-offices/
 ## Кто использует эту папку
 
 - **Демиург** (Архитектор команды) — перед сборкой нового агента читает `distilled/agent-design.md` и `memory-architecture.md`
-- **Architect-of-Order** (Архитектор офиса) — перед аудитом читает `distilled/governance-cleanup.md`, `failures-to-avoid.md`, `routing-triggers.md`
+- **Рита** (Хранительница офиса, пак office-cleaner) — перед аудитом читает `distilled/governance-cleanup.md`, `failures-to-avoid.md`, `routing-triggers.md`
 - **Director** — при стратегических решениях по офису обращается к `distilled/10-principles.md`

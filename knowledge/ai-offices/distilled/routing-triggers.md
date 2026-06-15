@@ -65,7 +65,7 @@ description: |
 1. Пользователь: «проверь офис»
 2. Director смотрит routing-patterns.md → находит **два** маппинга:
    - `/audit-project` (старый, через Demiurg)
-   - `/office-architect` (новый, через Architect-of-Order)
+   - `/office-cleaner` (новый, через Architect-of-Order)
 3. Director не знает кому передать. Скорее всего выберет первый по очереди (legacy).
 4. Architect-of-Order никогда не запустится из-за collision.
 
@@ -73,9 +73,9 @@ description: |
 
 ```diff
 - "проверь офис" / "наведи порядок" / "есть дыры" / "аудит" → /audit-project
-+ "проверь офис" / "наведи порядок" → /office-architect (scan по умолчанию)
-+ "новый аудит структуры" / "deep audit" → /office-architect deep
-+ "что не так с офисом" → /office-architect
++ "проверь офис" / "наведи порядок" → /office-cleaner (scan по умолчанию)
++ "новый аудит структуры" / "deep audit" → /office-cleaner deep
++ "что не так с офисом" → /office-cleaner
 - (старая запись /audit-project удаляется или мигрирует на узкие триггеры
    типа «аудит проекта», «проверка перед сборкой»)
 ```
@@ -135,7 +135,7 @@ has_paying_customers: false
 
 | Уровень | Как | Пример | Когда |
 |---------|-----|--------|-------|
-| **Явный slash-command** | Пользователь печатает `/skill-name` | `/morning`, `/jtbd`, `/office-architect` | Когда пользователь знает что делать |
+| **Явный slash-command** | Пользователь печатает `/skill-name` | `/morning`, `/jtbd`, `/office-cleaner` | Когда пользователь знает что делать |
 | **Неявный keyword match** | Director роутит на основе семантики triggers | «утро» → `/morning`, «упакуй оффер» → `/core-offer` | Когда пользователь говорит как обычно |
 
 **Семантический поиск через `description:`.** Anthropic (`research/01-youtube-research.md:383`):
@@ -157,7 +157,7 @@ has_paying_customers: false
 3. **Стейт-граф `agent-state.md` пройден до конца.** Нет «битых» состояний.
 4. **Нет циклов.** Алекс не передаёт в Алекса через посредника.
 
-**Запуск:** еженедельно (пятница) через `/office-architect`.
+**Запуск:** еженедельно (пятница) через `/office-cleaner`.
 
 **Output:** список trigger collisions + dead links (`@office/agents/cherry/core.md` есть в CLAUDE.md, файла нет).
 
@@ -216,7 +216,7 @@ Hamel Husain (`research/02-forums-communities.md:340`):
 | Director | Оркестратор | первая точка входа | /morning, /triage, /wrap-up |
 | Strategist | Распаковка | новый клиент, новый проект | /strategist-* (6 скиллов) |
 | Designer | Brand Book | визуал, лендинги | /brand-onboarding, /design-* |
-| Architect-of-Order | Порядок офиса | проверь офис, аудит | /office-architect (scan/tidy/deep) |
+| Architect-of-Order | Порядок офиса | проверь офис, аудит | /office-cleaner (scan/tidy/deep) |
 | Alex-marketer (pack) | Маркетинг | распакуй ЦА, оффер | /jtbd, /core-offer, /jtbd-critic |
 
 ## Граф передачи задач
@@ -226,7 +226,7 @@ Hamel Husain (`research/02-forums-communities.md:340`):
         ├── Алекс ─→ Producer / Copywriter / Designer / Hermes
         ├── Strategist ─→ /strategist-pipeline
         ├── Demiurg (pack, on-demand) ─→ /build
-        └── Architect-of-Order ─→ /office-architect
+        └── Architect-of-Order ─→ /office-cleaner
 ```
 
 **Update protocol.** При установке нового агента через `/install-agent`:
@@ -250,7 +250,7 @@ Hamel Husain (`research/02-forums-communities.md:340`):
 
 | Запрос пользователя | Агент | Скилл | Комментарий |
 |---|---|---|---|
-| "проверь офис" / "наведи порядок" | Архитектор офиса | /office-architect | scan по умолчанию |
+| "проверь офис" / "наведи порядок" | Архитектор офиса | /office-cleaner | scan по умолчанию |
 | "новый клиент" / "распакуй меня" | Стратег | /strategist-intake | 8-фазный pipeline |
 | "распакуй ЦА" / "JTBD" | Алекс (pack) | /jtbd | если has_paying_customers |
 | "упакуй оффер" | Алекс | /core-offer | если stage_1_critic_passed |

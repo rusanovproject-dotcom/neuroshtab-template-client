@@ -166,7 +166,7 @@ agent role-descriptors → suffix      (-pro, -specialist, -expert, -architect, 
 | 4 | **/triage** | Разбор inbox через Revenue Filter | `triage`, `что в инбоксе` |
 | 5 | **/intake** | Разбор папки `inbox/` — классифицирует файлы | `разбери инбокс`, `положи файл` |
 | 6 | **/interview** | Интерактивное интервью (Harper Reed pattern) для размытых задач | `давай обсудим`, `придумай оффер`, `новый проект` |
-| 7 | **/audit-project** или **/office-architect** | Аудит офиса, Architect-of-Order | `проверь офис`, `аудит` |
+| 7 | **/audit-project** или **/office-cleaner** | Аудит офиса, Architect-of-Order | `проверь офис`, `аудит` |
 | 8 | **/install-agent** | Установка готового пака из `_agent-packs/` | `подключи копирайтера`, `нужен маркетолог` |
 | 9 | **/update-office** | Безопасное обновление офиса до свежей версии | `обнови офис` |
 | 10 | **/new-project** | Создание нового проекта со структурой папок | `новый проект` |
@@ -239,7 +239,7 @@ echo "Какие скиллы есть для маркетинга?" | claude --
 | All SKILL.md have allowed-tools: field | 2 pts | белый список tools |
 | Все commands с `$ARGUMENTS` имеют `argument-hint:` | 2 pts | UX подсказка |
 
-Эти чеки автоматизируются через bash + jq в `/office-architect scan`. См. `distilled/governance-cleanup.md` модуль M2 Skill Auditor.
+Эти чеки автоматизируются через bash + jq в `/office-cleaner scan`. См. `distilled/governance-cleanup.md` модуль M2 Skill Auditor.
 
 ---
 

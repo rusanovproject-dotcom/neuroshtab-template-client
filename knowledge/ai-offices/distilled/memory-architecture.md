@@ -201,7 +201,7 @@ Append-only. Самые острые уроки всех агентов.
 
 ## 8. Cleanup памяти — раз в сутки
 
-AutoDream-правило (`research/04-governance-cleanup-agents.md:54`): **`>=24h` И `>=5 sessions`** с прошлой уборки. Запускает Architect-of-Order через `/office-architect tidy` или раз в сутки автоматически.
+AutoDream-правило (`research/04-governance-cleanup-agents.md:54`): **`>=24h` И `>=5 sessions`** с прошлой уборки. Запускает Architect-of-Order через `/office-cleaner tidy` или раз в сутки автоматически.
 
 Что чистит (4 категории):
 

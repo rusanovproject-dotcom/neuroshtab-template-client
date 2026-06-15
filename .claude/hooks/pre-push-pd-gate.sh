@@ -51,8 +51,10 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     grep -iE "$FORBIDDEN_RE" <<<"$files" | head -5 | sed 's/^/     • /' >&2
   fi
 
-  # 2) Карточки людей / входящие документы (ПД) — кроме шаблона карточки и индексов
-  pd="$(grep -E '^(clients|inbox/docs)/' <<<"$files" \
+  # 2) ПД владельца/людей: карточки, входящие документы, заполненные overrides/prework, voiceprint.
+  #    overrides.md и inbox/prework.md в шаблоне трекаются ПУСТЫМИ — git не разтрекивает их через
+  #    .gitignore, поэтому вторая линия (этот гейт) ловит ИЗМЕНЕНИЯ в них (= заполненные пользователем ПД).
+  pd="$(grep -E '^(clients|inbox/docs)/|(^|/)overrides\.md$|^inbox/prework\.md$|(^|/)voiceprint/' <<<"$files" \
         | grep -vE '^clients/(README\.md|INDEX\.md|_template/)' \
         | grep -vE '^inbox/docs/README\.md$' || true)"
   if [[ -n "$pd" ]]; then

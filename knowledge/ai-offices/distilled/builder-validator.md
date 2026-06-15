@@ -39,7 +39,7 @@ Validator без write-доступа = честная QA. Если он не м
 3. **README hyperbole + дубль 6/7 модулей** — терминологическая каша между core.md (6 модулей) и knowledge/7-modules.md (7 модулей). Demiurg бы поймал это в M5 Knowledge Dedup на собственных файлах если бы запустил dogfooding.
 4. **`.env` defense только prompt** — Demiurg сам себе записал «нужен fix install.md», но fix не сделал. Validate → Iterate цикл оборван.
 
-**Главный урок:** *«Demiurg прошёл всё своё validation pipeline, но не сделал dogfooding — не запустил `/office-architect scan` на собственном паке. Это бы поймало P0-1 (trigger collision) и P0-4 (heading collision Module 7) в первый же прогон.»*
+**Главный урок:** *«Demiurg прошёл всё своё validation pipeline, но не сделал dogfooding — не запустил `/office-cleaner scan` на собственном паке. Это бы поймало P0-1 (trigger collision) и P0-4 (heading collision Module 7) в первый же прогон.»*
 
 ---
 
@@ -179,11 +179,11 @@ Writer → Validator → Refiner
 
 **Главное правило:** любой агент-инспектор сначала прогоняет себя.
 
-Architect-of-Order должен запустить `/office-architect scan` на собственном паке ДО того как его раздавать.
+Architect-of-Order должен запустить `/office-cleaner scan` на собственном паке ДО того как его раздавать.
 
 В этом исследовании Demiurg **не сделал dogfooding** (`research/08-reviewer-report.md:476`):
 
-> *«Demiurg прошёл всё своё validation pipeline, но не сделал dogfooding — не запустил /office-architect scan на собственном паке. Один прогон поймал бы 2 из 4 P0 сразу. Любой агент-инспектор должен сначала прогнать себя.»*
+> *«Demiurg прошёл всё своё validation pipeline, но не сделал dogfooding — не запустил /office-cleaner scan на собственном паке. Один прогон поймал бы 2 из 4 P0 сразу. Любой агент-инспектор должен сначала прогнать себя.»*
 
 **Будущим итерациям `/build`** — добавить **Phase 9 Dogfooding** для агентов которые могут проверить сами себя. Пример: Architect-of-Order, /audit-project, agent-quality-reviewer.
 

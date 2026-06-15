@@ -28,7 +28,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ## Workflow
 1. Прочитай `knowledge/_ingest-queue.md` → секция `## Pending`. Если пусто — скажи «очередь пуста», стоп.
 2. Для каждого pending-файла (бери пачкой до 5 за раз, чтобы не жечь контекст):
-   - прочитай источник, определи домен (`knowledge/domains/<x>/`; AI → `domains/ai`);
+   - прочитай источник, определи домен (`knowledge/domains/<x>/`; по смыслу — audience/product/brand/competition);
    - нарежь на атомарные заметки по формату `wiki-ingest/SKILL.md`;
    - **в каждой заметке проставь `confidence: high|medium|low`** во frontmatter (насколько уверенно факт извлечён);
    - заметки с `confidence: low` продублируй путём в `domains/<x>/_review/` (mkdir -p) — чтобы человек глянул только их;
