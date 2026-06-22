@@ -73,12 +73,12 @@ else
   blocker "A1: Root CLAUDE.md is MISSING"
 fi
 
-# A2: AGENTS.md exists (BLOCKER for small+)
-if [ -f "$TARGET/AGENTS.md" ]; then
+# A2: AGENTS.md exists (BLOCKER for small+) — поддержка office/ layout клиентского шаблона
+if [ -f "$TARGET/AGENTS.md" ] || [ -f "$TARGET/office/AGENTS.md" ]; then
   pass "A2: AGENTS.md exists"
 else
   # Check if there are agents/ dir — if yes, it's small+ and AGENTS.md is required
-  if [ -d "$TARGET/agents" ] || [ -d "$TARGET/.claude/agents" ]; then
+  if [ -d "$TARGET/agents" ] || [ -d "$TARGET/.claude/agents" ] || [ -d "$TARGET/office/agents" ]; then
     blocker "A2: AGENTS.md is MISSING (agents/ directory exists — small+ pattern requires it)"
   else
     pass "A2: AGENTS.md not needed (solo pattern)"
@@ -137,9 +137,12 @@ echo ""
 echo -e "${CYAN}[B. Agents]${NC}"
 
 # Parse AGENTS.md to find agent file references
-AGENTS_FILE="$TARGET/AGENTS.md"
+AGENTS_FILE=""
+for candidate in "$TARGET/AGENTS.md" "$TARGET/office/AGENTS.md"; do
+  [ -f "$candidate" ] && AGENTS_FILE="$candidate" && break
+done
 AGENTS_DIR=""
-for candidate in "$TARGET/agents" "$TARGET/.claude/agents"; do
+for candidate in "$TARGET/agents" "$TARGET/.claude/agents" "$TARGET/office/agents"; do
   [ -d "$candidate" ] && AGENTS_DIR="$candidate" && break
 done
 
@@ -271,12 +274,9 @@ fi
 c2_ok=true
 c2_checked=0
 while IFS= read -r mdfile; do
-  lineno=0
-  while IFS= read -r line; do
-    ((lineno++))
-    # Extract file paths from backticks, markdown links, and plain references
-    # Pattern: paths ending in .md or .sh, containing at least one /
-    while IFS= read -r link; do
+    # Extract backtick-quoted file refs `…ext` — one awk pass per file (lineno = FNR),
+    # instead of echo|grep|sed per line. Skip rules + resolution below unchanged.
+    while IFS=$'\t' read -r lineno link; do
       [ -z "$link" ] && continue
       # Skip URLs
       [[ "$link" == http* ]] && continue
@@ -316,10 +316,10 @@ while IFS= read -r mdfile; do
           c2_ok=false
         fi
       fi
-    done < <(echo "$line" | grep -oE '`[^`]+\.(md|sh|yml|yaml|json)`' 2>/dev/null | sed 's/`//g')
+    done < <(awk '{ s = $0; while (match(s, /`[^`]+\.(md|sh|yml|yaml|json)`/)) { print FNR "\t" substr(s, RSTART + 1, RLENGTH - 2); s = substr(s, RSTART + RLENGTH) } }' "$mdfile" 2>/dev/null)
 
-    # Also check markdown link syntax [text](path)
-    while IFS= read -r link; do
+    # Also check markdown link syntax [text](path) — one awk pass per file.
+    while IFS=$'\t' read -r lineno link; do
       [ -z "$link" ] && continue
       [[ "$link" == http* ]] && continue
       [[ "$link" == *'$'* ]] && continue
@@ -343,48 +343,44 @@ while IFS= read -r mdfile; do
           c2_ok=false
         fi
       fi
-    done < <(echo "$line" | grep -oE '\]\([^)]+\)' 2>/dev/null | sed 's/\](//;s/)$//' | grep -E '\.(md|sh|yml|yaml|json)$')
+    done < <(awk '{ s = $0; while (match(s, /\]\([^)]+\)/)) { tok = substr(s, RSTART + 2, RLENGTH - 3); if (tok ~ /\.(md|sh|yml|yaml|json)$/) print FNR "\t" tok; s = substr(s, RSTART + RLENGTH) } }' "$mdfile" 2>/dev/null)
 
-  done < "$mdfile"
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 $c2_ok && pass "C2: All file references valid ($c2_checked checked)"
 
 # C3: No duplicate content blocks (>5 identical consecutive lines across files) (WARNING)
 c3_ok=true
 dup_tmp=$(mktemp)
-# Collect 5-line blocks from all .md files and hash them
-while IFS= read -r mdfile; do
-  total_lines=$(wc -l < "$mdfile" | tr -d ' ')
-  if [ "$total_lines" -ge 5 ]; then
-    i=1
-    while [ $i -le $((total_lines - 4)) ]; do
-      block_hash=$(sed -n "${i},$((i+4))p" "$mdfile" | md5 2>/dev/null || sed -n "${i},$((i+4))p" "$mdfile" | md5sum 2>/dev/null | cut -d' ' -f1)
-      # Skip blocks that are mostly empty or just formatting
-      block_content=$(sed -n "${i},$((i+4))p" "$mdfile" | tr -d '[:space:]|#-')
-      if [ ${#block_content} -gt 20 ]; then
-        echo "$block_hash|$mdfile:$i" >> "$dup_tmp"
-      fi
-      ((i += 5))
-    done
-  fi
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+# Single awk pass over all .md files: emit "<file:startline>US<l1>US…US<l5>" for each
+# non-overlapping full 5-line window whose normalized content (sans whitespace/|/#/-) > 20 chars.
+# Field sep = US (\x1f): location first, then the 5 raw lines. US (not TAB) is used so a literal
+# TAB inside a content line can't corrupt parsing — keeps the dedup key faithful to the raw block
+# (как старый md5). Replaces the old per-window sed+md5 loop (~3 subprocesses × thousands of windows).
+find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' -print0 2>/dev/null \
+  | xargs -0 awk '
+      BEGIN { US = sprintf("%c", 31) }
+      function emit(   i, line, norm) {
+        norm = b[1] b[2] b[3] b[4] b[5]; gsub(/[[:space:]|#-]/, "", norm)
+        if (length(norm) <= 20) return
+        line = FILENAME ":" start
+        for (i = 1; i <= 5; i++) line = line US b[i]
+        print line
+      }
+      FNR == 1 { n = 0 }
+      { if (n == 0) start = FNR; b[++n] = $0; if (n == 5) { emit(); n = 0 } }
+    ' 2>/dev/null | sort -t"$(printf '\037')" -k2 > "$dup_tmp"
 
-if [ -f "$dup_tmp" ] && [ -s "$dup_tmp" ]; then
-  while IFS= read -r hash; do
-    locations=$(grep "^${hash}|" "$dup_tmp" | cut -d'|' -f2 | head -5)
-    loc_count=$(grep -c "^${hash}|" "$dup_tmp")
-    if [ "$loc_count" -ge 2 ]; then
-      # Check that locations are in DIFFERENT files
-      files=$(grep "^${hash}|" "$dup_tmp" | cut -d'|' -f2 | cut -d':' -f1 | sort -u)
-      file_count=$(echo "$files" | wc -l | tr -d ' ')
-      if [ "$file_count" -ge 2 ]; then
-        first_two=$(echo "$locations" | head -2 | tr '\n' ' ')
-        warn "C3: Duplicate content block found in: $first_two"
-        c3_ok=false
-        break  # Report only first duplicate to avoid noise
-      fi
-    fi
-  done < <(cut -d'|' -f1 "$dup_tmp" | sort | uniq -d)
+# Sorted by body (fields 2+), identical bodies are adjacent. First adjacent pair from two DIFFERENT files = duplicate.
+if [ -s "$dup_tmp" ]; then
+  c3_hit=$(awk 'BEGIN { US = sprintf("%c", 31); FS = US }
+    { loc = $1; body = substr($0, index($0, US) + 1) }
+    body == pb { split(loc, a, ":"); split(pl, p, ":"); if (a[1] != p[1]) { print pl " " loc; exit } }
+    { pb = body; pl = loc }
+  ' "$dup_tmp")
+  if [ -n "$c3_hit" ]; then
+    warn "C3: Duplicate content block found in: $c3_hit"
+    c3_ok=false
+  fi
 fi
 rm -f "$dup_tmp"
 $c3_ok && pass "C3: No duplicate content blocks"
@@ -420,7 +416,7 @@ while IFS= read -r mdfile; do
     target_clean=$(echo "$target" | sed 's/`//g; s/\.md//g' | xargs)
     [ -n "$target_clean" ] && echo "$from -> $target_clean" >> "$graph_tmp"
   done < <(grep -iE '(передай|forward|delegate|→|эскалируй)' "$mdfile" 2>/dev/null | grep -oE '`[^`]+\.md`' | sed 's/`//g' | sed 's/\.md//')
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 
 if [ -f "$graph_tmp" ] && [ -s "$graph_tmp" ]; then
   # Simple cycle detection: for each node, follow edges up to depth 10
@@ -491,7 +487,7 @@ while IFS= read -r mdfile; do
     warn "D3: $rel has $todo_count TODO/FIXME stubs"
     d3_ok=false
   fi
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 $d3_ok && pass "D3: No TODO stubs found"
 
 # D4: All md files <= 300 lines (WARNING, excluding walkthrough/guide files)
@@ -508,7 +504,7 @@ while IFS= read -r mdfile; do
     warn "D4: $rel is $lines lines (limit: 300)"
     d4_ok=false
   fi
-done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' 2>/dev/null)
+done < <(find "$TARGET" -name "*.md" -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/archive/*' -not -path '*/ai-offices/*' -not -path '*/_archive/*' 2>/dev/null)
 $d4_ok && pass "D4: All md files <= 300 lines"
 
 # D5: ops/ directory exists (WARNING)

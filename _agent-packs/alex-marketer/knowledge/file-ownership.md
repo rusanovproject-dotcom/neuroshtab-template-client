@@ -25,7 +25,6 @@
 | `product/core-offer.md` | владелец | из validated [PRODUCT/OFFER] H |
 | `product/ladder.md` | владелец | из validated [PRICE] H |
 | `brand/positioning.md` | владелец | из validated [POSITIONING] H |
-| `funnel/channels.md, welcome.md, scripts.md` | владелец (с твоей помощью через `/funnel-build`) | из validated [CHANNEL/LM/FUNNEL] H |
 
 ---
 

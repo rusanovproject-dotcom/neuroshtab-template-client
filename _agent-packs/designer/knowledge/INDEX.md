@@ -10,6 +10,11 @@
 | `motion-principles.md` | **Библия анимаций** — таблицы тайминга (80-120ms, 400-600ms), Material 3 easing-кривые, Disney-принципы для UI, stagger-паттерны, шаблон "было/стало" в промтах. Читать ПЕРЕД любым упоминанием анимации. |
 | `brand-palette-guide.md` | **40 готовых стартовых палитр по нишам** (онлайн-курсы, коучинг, SaaS, e-commerce, AI-платформа, wellness, legal, fintech и др.) — для каждой: Primary/Secondary/Accent/Background в hex, пара Google Fonts, mood в 3-5 словах, rationale. Используется в brand-onboarding как "Вариант №1 Industry Standard". |
 | `brand-references-catalog.md` | **30 эталонных брендов** (Apple, Stripe, Linear, Notion, Vercel, Framer, Claude и др.) со slug'ами для `npx getdesign add {slug}`. Используется когда пользователь говорит "хочу как [бренд]" — загружаем их DESIGN.md через skill `brand-reference`. |
+| `mcp-libraries.md` | **Опциональный арсенал MCP-серверов** — Magic UI (150+), ReactBits (135+ WebGL фоны), Aceternity UI (200+ premium), 21st.dev Magic (генерация UI). 400+ готовых компонентов. Читай перед лендингом / интерактивом если у тебя в инструментах есть `mcp__magic-ui__*` и др. Если MCP не подключены — секция «Если MCP не подключены» внутри файла показывает как предложить пользователю подключить. |
+| `mcp-setup.md` | **Готовая инструкция-шаблон для пользователя** — что отдать когда он сказал «давай подключим MCP». Живой текст с JSON-блоком, ссылкой на бесплатный API-ключ 21st.dev, merge-инструкцией если `.mcp.json` уже есть, troubleshooting. Не пиши инструкцию с нуля — бери из этого файла. |
+| `component-decision-matrix.md` | **Матрица «нужен X → бери Y»** для 60+ паттернов: hero / текст / карточки / кнопки / скролл / фоны / навигация / иконки. Две колонки: с MCP / без MCP (fallback). Быстрые рецепты для типовых задач («лендинг за 2 часа», «wow-hero»). |
+| `animation-patterns.md` | **Рабочие сниппеты анимаций** — copy-paste код Motion + GSAP + Lenis: fade-up, stagger, hover, scroll-trigger, pin, parallax, scrub, smooth scroll, микро-интеракции. Дополняет `motion-principles.md` (там принципы, тут код). |
+| `landing-playbook.md` | **Техническая сборка лендинга** — структура 12 секций (Navbar → Hero → ... → Footer), что использовать в каждой (с MCP / без), responsive, performance checklist, screenshot loop. Дополняет `landing-frameworks.md` (там смысл, тут исполнение). |
 
 ---
 
@@ -31,3 +36,4 @@
 - **Палитра — из ниши пользователя первой опцией.** `brand-palette-guide.md` даёт "Industry Standard" для 40 ниш — используй в Brand Book онбординге как Вариант №1.
 - **Анимации — в цифрах, не "плавно".** `motion-principles.md` всегда открыт при упоминании движения. Не "smooth animations", а "180ms cubic-bezier(0.4,0,0.2,1)".
 - **Эталонные бренды грузятся командой.** Пользователь говорит "как Apple" → skill `brand-reference` → `npx getdesign add apple`. Каталог 30 брендов в `brand-references-catalog.md`.
+- **MCP-библиотеки — опциональный множитель силы.** Если подключены — 400+ готовых компонентов через `mcp__magic-ui__*` / `mcp__reactbits__*` / `mcp__aceternity-ui__*` / `mcp__21st-magic__*`. Лендинг собирается в 3-5 раз быстрее, выглядит жирнее. Если не подключены — в первом контакте предложи пользователю подключить (см. `mcp-libraries.md` секцию «Если MCP не подключены»). Все компоненты подмени под Brand Book — палитра, шрифты, радиусы.

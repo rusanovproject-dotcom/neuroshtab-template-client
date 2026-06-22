@@ -1,4 +1,63 @@
+# ============================================================
+#  ПД-ГЕЙТ клиентского AI-офиса (PUBLIC TEMPLATE — ничего личного)
+#
+#  Шаблон публичный. Карточки людей, транскрипты, лиды, секреты —
+#  ТОЛЬКО в приватный контур (см. CLAUDE.md → раздел «ПД-гейт»).
+#  Вторая линия защиты — pre-push hook (.claude/hooks/pre-push-pd-gate.sh),
+#  ставится при /setup в .git/hooks/pre-push.
+# ============================================================
+
+# --- секреты ---
+.env
+.env.*
+*.pem
+credentials*
+secrets*
+config.env
+
+# --- ПД: карточки людей (clients/) — приватный контур ---
+# Игнорируем содержимое clients/, КРОМЕ шаблона карточки и индексов.
+clients/*
+!clients/README.md
+!clients/INDEX.md
+!clients/_template/
+!clients/_template/**
+
+# --- ПД: входящие документы (лиды, кейсы, оффер, транскрипты разборов) ---
+inbox/docs/*
+!inbox/docs/README.md
+
+# --- транскрипты и медиа (живут вне git, в приватном медиа-контуре) ---
+*transcript*
+transcripts/
+*.mp4
+*.mp3
+*.m4a
+*.wav
+clients/**/calls/
+# но реестр звонков в шаблоне карточки (без ПД) — оставляем
+!clients/_template/calls/
+!clients/_template/calls/**
+media/
+
+# --- voiceprint (голос / ДНК пользователя = ПД) ---
+voiceprint/
+**/voiceprint/
+
+# --- overrides.md: пустой шаблон в репо = ок; заполненный пользователем = ПД ---
+# ⚠️ git НЕ разтрекивает уже-tracked overrides.md (10 пустых шаблонов в
+# office/agents/* и _agent-packs/*) — для них эта строка не действует. Их
+# заполнение (= ПД) ловит pre-push ПД-гейт (вторая линия). Строка ниже
+# защищает только НОВЫЕ overrides.md (создаются при установке паков).
+**/overrides.md
+
+# --- runtime / служебное ---
 .env
 .DS_Store
 node_modules/
 .claude/agent-memory*
+.mcp.json
+
+# Installed agent-packs that live in their own upstream repos
+# (managed via /install-agent, not committed here)
+_agent-packs/copywriter/

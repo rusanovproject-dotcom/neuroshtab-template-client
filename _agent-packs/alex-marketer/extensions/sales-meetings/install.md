@@ -35,7 +35,7 @@
 4. **Регистрирует триггеры** для `core.md` маркетолога:
    ```markdown
    ## Активные расширения
-   - sales-meetings ON → `/marketer-log-deal`, `/parse-meeting`
+   - sales-meetings ON → `/jtbd-log-deal`, `/parse-meeting`
    ```
 
 5. **Записывает в `CHANGELOG.md` проекта**:
@@ -56,7 +56,7 @@
 |--------|-------------------------------|
 | `customers-INDEX.template.md` | `customers/INDEX.md` |
 | `customer-summary.template.md` | `customers/{name}/_summary.md` (при первой встрече с клиентом) |
-| `customer-card-diag.template.md` | `customers/{name}/{date}-diag.md` (по триггеру `/marketer-log-deal`) |
+| `customer-card-diag.template.md` | `customers/{name}/{date}-diag.md` (по триггеру `/jtbd-log-deal`) |
 | `customer-card-deal.template.md` | `customers/{name}/{date}-deal.md` (по триггеру оплаты) |
 | `transcript-summary.template.md` | `customers/{name}/transcripts/{date}-{type}.md` (по триггеру `/parse-meeting`) |
 | `refusal.template.md` | `customers/refusals/{name}-{date}.md` (по триггеру отказа) |
@@ -65,7 +65,7 @@
 
 Скилл `/marketer-disable-meetings`:
 - НЕ удаляет `customers/` (архив остаётся)
-- Снимает регистрацию триггеров `/marketer-log-deal`, `/parse-meeting`
+- Снимает регистрацию триггеров `/jtbd-log-deal`, `/parse-meeting`
 - Записывает в CHANGELOG
 
 ## Зависимости
